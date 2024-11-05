@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: httpbin-ingress
+  annotations:
+    # This annotation tells Contour to use HTTP for routing
+    ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: httpbin.v34l.com   # The hostname you want to use
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: httpbin   # Name of the httpbin service
+            port:
+              number: 80
