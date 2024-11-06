@@ -3,6 +3,8 @@ kind: Service
 metadata:
   name: httpbin
   namespace: default
+  labels:
+    app: httpbin
 spec:
   ports:
   - port: 80
