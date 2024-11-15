@@ -2,18 +2,17 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: httpbin-ingress
-  namespace: default
   annotations:
-    kubernetes.io/ingress.class: "traefik"
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-    - host: httpbin.v34l.com  # Replace with your domain or use a wildcard for testing
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: httpbin
-                port:
-                  number: 80
+  - host: httpbin.cluster.v34l.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: httpbin
+            port:
+              number: 80
