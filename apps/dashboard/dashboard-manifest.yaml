@@ -5,7 +5,7 @@ metadata:
   name: kubernetes-dashboard-tls
   namespace: kubernetes-dashboard
 spec:
-  commonName: dashboard.cluster.mydomain.org
+  commonName: dashboard.cluster.v34l.com
   secretName: kubernetes-dashboard-tls
   dnsNames:
     - dashboard.cluster.v34l.com
@@ -31,13 +31,13 @@ metadata:
     nginx.ingress.kubernetes.io/backend-protocol: HTTPS
 
 spec:
-  ingressClassName: traefik
+  ingressClassName: nginx
   tls:
   - hosts:
-    - dashboard.cluster.mydomain.org
+    - dashboard.cluster.v34l.com
     secretName: kubernetes-dashboard-tls
   rules:
-  - host: dashboard.cluster.mydomain.org
+  - host: dashboard.cluster.v34l.com
     http:
       paths:
       - path: /
