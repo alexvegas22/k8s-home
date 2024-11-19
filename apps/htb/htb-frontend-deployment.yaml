@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: htb-frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: htb-frontend
+  template:
+    metadata:
+      labels:
+        app: htb-frontend
+    spec:
+      containers:
+      - name: htb-frontend
+        image: v34l/htb-frontend:latest
+        ports:
+        - containerPort: 80
