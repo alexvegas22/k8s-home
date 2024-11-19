@@ -2,8 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: htb-frontend
+  namespace: htb
 spec:
-  replicas: 2
   selector:
     matchLabels:
       app: htb-frontend
