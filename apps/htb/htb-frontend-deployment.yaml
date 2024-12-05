@@ -15,5 +15,6 @@ spec:
       containers:
       - name: htb-frontend
         image: v34l/htb-frontend:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 80
