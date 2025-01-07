@@ -10,6 +10,8 @@ spec:
     privateKeySecretRef:
       name: letsencrypt-staging-account-key
     solvers:
-    - http01:
-        ingress:
-          class: nginx
+    - dns01:
+        cloudflare:
+          apiTokenSecretRef:
+            name: cloudflare-token
+            key: token

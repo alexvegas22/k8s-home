@@ -26,6 +26,31 @@ spec:
           value: arm
         - name: MONGO_INITDB_ROOT_PASSWORD
           value: sdpeivvba099rnc82bc
+        - name: MONGO_INITDB_DATABASE
+          value: admin # Optional: Specify a default database
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+        readinessProbe:
+          exec:
+            command:
+            - mongo
+            - --eval
+            - db.runCommand({ ping: 1 })
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          exec:
+            command:
+            - mongo
+            - --eval
+            - db.runCommand({ ping: 1 })
+          initialDelaySeconds: 10
+          periodSeconds: 10
       volumes:
       - name: mongodb-data
         persistentVolumeClaim:

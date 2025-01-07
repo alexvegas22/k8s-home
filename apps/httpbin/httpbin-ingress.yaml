@@ -3,6 +3,7 @@ kind: Ingress
 metadata:
   name: httpbin-ingress
   annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-staging
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
@@ -16,3 +17,7 @@ spec:
             name: httpbin
             port:
               number: 80
+  tls:
+    - hosts:
+      - httpbin.cluster.v34l.com
+      secretName: httpbin-tls

@@ -22,14 +22,14 @@ metadata:
   namespace: kubernetes-dashboard
   name: kubernetes-dashboard-ingress
   annotations:
-    cert-manager.io/cluster-issuer: selfsigned
+    cert-manager.io/cluster-issuer: letsencrypt-prod
     nginx.ingress.kubernetes.io/router.tls: "true"
 
     # This is important to tell the ingress controller to use HTTPS 
     # when forwarding traffic to the dashboard service.  If this isn't
     # here, the browser will receive an HTTP 400 response from the ingress 
     nginx.ingress.kubernetes.io/backend-protocol: HTTPS
-
+    cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
   ingressClassName: nginx
   tls:
