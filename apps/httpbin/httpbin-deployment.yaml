@@ -40,9 +40,9 @@ kind: Ingress
 metadata:
   name: httpbin-ingress
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-prod
-    traefik.ingress.kubernetes.io/router.tls: "true"
-    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    cert-manager.io/cluster-issuer: letsencrypt-staging
+    traefik.ingress.kubernetes.io/router.tls: "true" # Enables HTTPS
+    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure # Allow both HTTP and HTTPS
     ingressclass.kubernetes.io/is-default-class: "true"
 spec:
   ingressClassName: traefik 
