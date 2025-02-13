@@ -1,46 +1,46 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: httpbin
+  name: v34l
   labels:
-    app: httpbin
+    app: v34l
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: httpbin
+      app: v34l
   template:
     metadata:
       labels:
-        app: httpbin
+        app: v34l
     spec:
       containers:
-      - name: httpbin
-        image: kennethreitz/httpbin
+      - name: v34l
+        image: kennethreitz/v34l
         ports:
         - containerPort: 80
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: httpbin
+  name: v34l
   namespace: default
   labels:
-    app: httpbin
+    app: v34l
 spec:
   ports:
   - port: 80
     targetPort: 80
   selector:
-    app: httpbin
+    app: v34l
   type : ClusterIP
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: httpbin-ingress
+  name: v34l-ingress
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-prod
+    cert-manager.io/cluster-issuer: letsencrypt-staging
     traefik.ingress.kubernetes.io/router.tls: "true" # Enables HTTPS
     traefik.ingress.kubernetes.io/router.entrypoints: web,websecure # Allow both HTTP and HTTPS
     ingressclass.kubernetes.io/is-default-class: "true"
@@ -54,10 +54,10 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: httpbin
+            name: v34l
             port:
               number: 80
   tls:
     - hosts:
       - v34l.com
-      secretName: httpbin-tls
+      secretName: v34l-tls

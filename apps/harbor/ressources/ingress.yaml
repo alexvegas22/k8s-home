@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: harbor-ingress
+  namespace: harbor
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    ingressclass.kubernetes.io/is-default-class: "true"
+spec:
+  ingressClassName: traefik
+  rules:
+  - host: core.harbor.v34l.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: harbor
+            port:
+              number: 80
+  tls:
+    - hosts:
+      - core.harbor.v34l.com
+      secretName: harbor-secret

@@ -1,0 +1,70 @@
+image:
+  repository: nextcloud
+  flavor: apache
+  tag: latest
+  pullPolicy: IfNotPresent
+
+replicaCount: 1
+
+ingress:
+  enabled: false
+
+nextcloud:
+  host: nextcloud.v34l.com
+  username: admin
+  password: root
+  existingSecret:
+    enabled: false
+  update: 0
+  containerPort: 80
+  datadir: /var/www/html/data
+
+internalDatabase:
+  enabled: false
+  name: nextcloud
+
+mariadb:
+  enabled: false
+
+postgresql:
+  enabled: true
+  auth:
+    username: nextcloud
+    password: strongpassword
+    database: nextcloud
+  primary:
+    persistence:
+      enabled: true
+      storageClass: "csi-rbd-sc"
+      accessMode: ReadWriteOnce
+      size: 5Gi  # Storage for PostgreSQL database
+
+  
+redis:
+  enabled: true
+  architecture: standalone
+  persistence:
+    enabled: true
+    storageClass: "csi-rbd-sc"
+    accessMode: ReadWriteOnce
+    size: 2Gi
+
+service:
+  type: ClusterIP
+  port: 80
+
+persistence:
+  enabled: true
+  storageClass: "csi-cephfs-sc"
+  accessMode: ReadWriteMany
+  size: 500Gi
+  nextcloudConfig:
+    enabled: true
+    storageClass: "csi-rbd-sc"
+    accessMode: ReadWriteOnce
+    size: 2Gi
+  nextcloudDatabase:
+    enabled: true
+    storageClass: "csi-rbd-sc"
+    accessMode: ReadWriteOnce
+    size: 5Gi
