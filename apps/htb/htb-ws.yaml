@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: htb-frontend
+  name: htb-ws
   namespace: htb
 spec:
   selector:
     matchLabels:
-      app: htb-frontend
+      app: htb-ws
   template:
     metadata:
       labels:
-        app: htb-frontend
+        app: htb-ws
     spec:
       containers:
-      - name: htb-frontend
-        image: v34l/htb-frontend:latest
+      - name: htb-ws
+        image: core.harbor.v34l.com/htb/htb-ws:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 80
@@ -22,42 +22,42 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: htb-frontend
+  name: htb-ws
   namespace: htb
   labels:
-    app: htb-frontend
+    app: htb-ws
 spec:
   ports:
   - port: 80
     targetPort: 80
   selector:
-    app: htb-frontend
+    app: htb-ws
   type: ClusterIP
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: htb-frontend-ingress
+  name: htb-ws-ingress
   namespace: htb
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-prod
+    cert-manager.io/cluster-issuer: letsencrypt-staging
     # nginx.ingress.kubernetes.io/rewrite-target: /
     traefik.ingress.kubernetes.io/router.tls: "true" # Enables HTTPS
     traefik.ingress.kubernetes.io/router.entrypoints: web,websecure # Allow both HTTP and HTTPS
     ingressclass.kubernetes.io/is-default-class: "true"
 spec:
   rules:
-  - host: htb.v34l.com
+  - host: ws.htb.v34l.com
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: htb-frontend
+            name: htb-ws
             port:
               number: 80
   tls:
     - hosts:
-      - htb.v34l.com
+      - ws.htb.v34l.com
       secretName: htb-secret

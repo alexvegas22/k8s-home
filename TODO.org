@@ -1,0 +1,18 @@
+* Tasks
+** HTB
+- Deploy WS
+- Deploy API
+- Deploy Redis
+  
+** Nextcloud
+- Fix CephFS
+- Setup
+  
+** Immich
+- Set up syncthing for file syncing
+
+** Wireguard
+- Set up remote access to pve
+  
+** Cloudflare
+- Proxy v34l.com
