@@ -20,14 +20,14 @@ nextcloud:
   datadir: /var/www/html/data
 
 internalDatabase:
-  enabled: false
+  enabled: true
   name: nextcloud
 
 mariadb:
   enabled: false
 
 postgresql:
-  enabled: true
+  enabled: false
   auth:
     username: nextcloud
     password: strongpassword
@@ -37,7 +37,7 @@ postgresql:
       enabled: true
       storageClass: "csi-rbd-sc"
       accessMode: ReadWriteOnce
-      size: 5Gi  # Storage for PostgreSQL database
+      size: 5Gi
 
   
 redis:
@@ -55,7 +55,7 @@ service:
 
 persistence:
   enabled: true
-  storageClass: "csi-cephfs-sc"
+  storageClass: "nfs-client"
   accessMode: ReadWriteMany
   size: 500Gi
   nextcloudConfig:

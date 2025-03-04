@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: services-harbor
+  namespace: argocd
+spec:
+  destination:
+    namespace: harbor
+    server: https://v34l.com
+  project: k8s-home
+  source:
+    path: apps/harbor
+    repoURL: git@github.com:alexvegas/k8s-home.git
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
