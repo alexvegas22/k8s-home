@@ -4,7 +4,6 @@ metadata:
   name: services-ceph
 spec:
   destination:
-    namespace: ceph
     server: https://v34l.com
   project: k8s-home
   source:
