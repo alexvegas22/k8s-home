@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: 0xV34L
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: 0xV34L
+  template:
+    metadata:
+      labels:
+        app: 0xV34L
+    spec:
+      containers:
+        - name: 0xV34L
+          image: core.harbor.v34l.com/hugo/0xV34L:latest
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "250m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: 0xV34L
+spec:
+  selector:
+    app: 0xV34L
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: ClusterIP

@@ -20,14 +20,13 @@ nextcloud:
   datadir: /var/www/html/data
 
 internalDatabase:
-  enabled: true
-  name: nextcloud
+  enabled: false
 
 mariadb:
   enabled: false
 
 postgresql:
-  enabled: false
+  enabled: true
   auth:
     username: nextcloud
     password: strongpassword
@@ -38,7 +37,6 @@ postgresql:
       storageClass: "csi-rbd-sc"
       accessMode: ReadWriteOnce
       size: 5Gi
-
   
 redis:
   enabled: true
@@ -55,9 +53,8 @@ service:
 
 persistence:
   enabled: true
-  storageClass: "nfs-client"
-  accessMode: ReadWriteMany
-  size: 500Gi
+  existingClaim: fs-pvc
+  mountPath: /var/www/html/data
   nextcloudConfig:
     enabled: true
     storageClass: "csi-rbd-sc"
@@ -68,3 +65,38 @@ persistence:
     storageClass: "csi-rbd-sc"
     accessMode: ReadWriteOnce
     size: 5Gi
+
+resources:
+  requests:
+    memory: "512Mi"
+    cpu: "500m"
+  limits:
+    memory: "1Gi"
+    cpu: "1"
+    
+livenessProbe:
+  enabled: false
+  initialDelaySeconds: 240
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 3
+  successThreshold: 1
+
+readinessProbe:
+  enabled: true
+  initialDelaySeconds: 240
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 3
+  successThreshold: 1
+
+startupProbe:
+  httpGet:
+    path: /status.php
+    port: 80
+  enabled: true
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 30
+  successThreshold: 1

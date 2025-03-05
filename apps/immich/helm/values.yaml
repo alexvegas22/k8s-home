@@ -1,0 +1,12 @@
+# Disable the default Ingress
+ingress:
+  enabled: false
+
+# Configure other settings as needed
+persistence:
+  enabled: true
+  storageClass: "nfs-storage"  # Replace with your desired storage class
+  size: 100Gi  # Adjust the size as needed
+
+service:
+  type: ClusterIP  # Use ClusterIP or NodePort if you want to expose it manually
