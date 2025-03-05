@@ -3,6 +3,7 @@ apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
    name: csi-rbd-sc
+   namepace: default
 provisioner: rbd.csi.ceph.com
 parameters:
    clusterID: daa14250-4aae-411b-8624-5790fb044c81
@@ -14,7 +15,7 @@ parameters:
    csi.storage.k8s.io/controller-expand-secret-namespace: default
    csi.storage.k8s.io/node-stage-secret-name: csi-rbd-secret
    csi.storage.k8s.io/node-stage-secret-namespace: default
-reclaimPolicy: Delete
+reclaimPolicy: Retain
 allowVolumeExpansion: true
 mountOptions:
    - discard
