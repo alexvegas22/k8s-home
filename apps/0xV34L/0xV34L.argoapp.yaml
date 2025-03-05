@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: services-0xV34L
+  namespace: 0xV34L
+spec:
+  destination:
+    namespace: 0xV34L
+    server: https://v34l.com
+  project: k8s-home
+  source:
+    path: apps/0xV34L
+    repoURL: git@github.com:alexvegas/k8s-home.git
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
