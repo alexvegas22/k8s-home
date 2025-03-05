@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: services-0xV34L
-  namespace: 0xV34L
+  namespace: hugo
 spec:
   destination:
     namespace: 0xV34L
