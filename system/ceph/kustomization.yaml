@@ -1,7 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 metadata:
-  name: htb-app
+  name: csi-app
 resources:
   - ceph-config-map.yaml
   - csi-config-map.yaml
