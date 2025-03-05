@@ -41,7 +41,6 @@ metadata:
   namespace: htb
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-staging
-    # nginx.ingress.kubernetes.io/rewrite-target: /
     traefik.ingress.kubernetes.io/router.tls: "true" # Enables HTTPS
     traefik.ingress.kubernetes.io/router.entrypoints: web,websecure # Allow both HTTP and HTTPS
     ingressclass.kubernetes.io/is-default-class: "true"
