@@ -14,10 +14,12 @@ spec:
     spec:
       containers:
       - name: htb-ws
-        image: core.harbor.v34l.com/htb/htb-ws:latest
+        image: harbor-core.harbor.svc.cluster.local/htb/htb-ws:latest
         imagePullPolicy: Always
         ports:
-        - containerPort: 80
+        - containerPort: 443
+      imagePullSecrets:
+      - name: harbor-credentials
 ---
 apiVersion: v1
 kind: Service
