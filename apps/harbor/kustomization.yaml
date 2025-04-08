@@ -11,6 +11,3 @@ helmCharts:
     releaseName: "harbor"
     namespace: harbor
     valuesFile: "helm/values.yaml"
-options:
-  buildOptions:
-    - --enable-helm
