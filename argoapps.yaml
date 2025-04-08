@@ -6,15 +6,20 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "0"
 spec:
+  project: default
   source:
-    path: .
+    repoURL: git@github.com:alexvegas/k8s-home.git
     targetRevision: HEAD
+    path: .
     directory:
       recurse: true
-      include: "{*.argoapp.yaml,*.argoapp.yml}"
+      include: '{*.argoapp.yaml,*.argoapp.yml}'
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
   syncPolicy:
-        automated:
-          selfHeal: true
-          prune: true
-        syncOptions:
-          - CreateNamespace=true
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
