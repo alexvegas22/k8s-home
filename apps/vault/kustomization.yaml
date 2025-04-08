@@ -4,7 +4,6 @@ metadata:
   name: vault
   namespace: vault
 resources:
-  - resources/certificate.yaml
   - resources/ingress.yaml
 helmCharts:
   - name: vault
