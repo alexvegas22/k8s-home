@@ -1,0 +1,30 @@
+global:
+  domain: argocd.v34l.com
+
+server:
+  ingress:
+    enabled: false
+
+  extraArgs:
+    - --insecure
+
+  service:
+    type: ClusterIP
+
+  config:
+    admin.enabled: true
+
+dex:
+  enabled: false
+
+controller:
+  metrics:
+    enabled: true
+
+repoServer:
+  metrics:
+    enabled: true
+
+applicationSet:
+  metrics:
+    enabled: true
