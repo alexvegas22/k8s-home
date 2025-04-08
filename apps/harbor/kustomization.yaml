@@ -5,7 +5,7 @@ resources:
   - resources/ingress.yaml
 helmCharts:
   - name: harbor
-    version: 1.16
+    version: "1.16"
     repo: https://helm.goharbor.io
     releaseName: "harbor"
     namespace: harbor
