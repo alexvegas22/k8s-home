@@ -6,7 +6,7 @@ metadata:
 spec:
   destination:
     namespace: hugo
-    server: https://v34l.com
+    server: https://kubernetes.default.svc
   project: k8s-home
   source:
     path: apps/v34l-blog
