@@ -9,7 +9,7 @@ spec:
     server: https://v34l.com
   project: k8s-home
   source:
-    path: apps/0xV34L
+    path: apps/v34l-blog
     repoURL: git@github.com:alexvegas22/k8s-home.git
     targetRevision: HEAD
   syncPolicy:
