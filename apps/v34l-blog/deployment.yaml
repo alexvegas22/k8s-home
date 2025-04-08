@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: 0xV34L
+  name: v34l-blog
   namespace: hugo
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: 0xV34L
+      app: v34l-blog
   template:
     metadata:
       labels:
-        app: 0xV34L
+        app: v34l-blog
     spec:
       containers:
-        - name: 0xV34L
+        - name: v34l-blog
           image: core.harbor.v34l.com/hugo/0xV34L:latest
           ports:
             - containerPort: 80
@@ -26,11 +26,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: 0xV34L
+  name: v34l-blog-service
   namespace: hugo
 spec:
   selector:
-    app: 0xV34L
+    app: v34l-blog
   ports:
     - protocol: TCP
       port: 80

@@ -1,11 +1,11 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: services-0xV34L
-  namespace: hugo
+  name: v34l-blog
+  namespace: argocd
 spec:
   destination:
-    namespace: 0xV34L
+    namespace: hugo
     server: https://v34l.com
   project: k8s-home
   source:
