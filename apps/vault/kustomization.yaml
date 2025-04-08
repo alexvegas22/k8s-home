@@ -13,4 +13,3 @@ helmCharts:
     releaseName: "vault"
     namespace: vault
     valuesFile: "helm/values.yaml"
-enableHelm: true
