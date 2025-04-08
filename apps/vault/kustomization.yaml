@@ -13,3 +13,5 @@ helmCharts:
     releaseName: "vault"
     namespace: vault
     valuesFile: "helm/values.yaml"
+data:
+  kustomize.buildOptions: --enable-helm
