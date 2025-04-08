@@ -6,7 +6,7 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "0"
 spec:
-  project: default
+  project: k8s-home
   source:
     repoURL: git@github.com:alexvegas22/k8s-home.git
     targetRevision: HEAD
