@@ -11,5 +11,6 @@ helmCharts:
     releaseName: "harbor"
     namespace: harbor
     valuesFile: "helm/values.yaml"
-data:
-  kustomize.buildOptions: --enable-helm
+options:
+  buildOptions:
+    - --enable-helm
