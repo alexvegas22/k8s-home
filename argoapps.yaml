@@ -8,7 +8,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https:/github.com/alexvegas22/k8s-home.git
+    repoURL: git@github.com:alexvegas22/k8s-home.git
     targetRevision: HEAD
     path: .
     directory:
