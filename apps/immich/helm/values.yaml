@@ -20,6 +20,11 @@ redis:
   auth:
     enabled: false
 
+immich:
+  persistence:
+    library:
+      existingClaim: fs-pvc
+
 server:
   enabled: true
   image:
