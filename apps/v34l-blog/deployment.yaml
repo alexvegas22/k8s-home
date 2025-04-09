@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: v34l-blog
-          image: core.harbor.v34l.com/hugo/0xV34L:latest
+          image: ghcr.io/alexvegas22/0xv34l:latest
           ports:
             - containerPort: 80
           resources:
