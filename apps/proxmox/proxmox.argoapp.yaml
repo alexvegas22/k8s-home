@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: proxmox
+  namespace: argocd
+spec:
+  destination:
+    namespace: proxmox
+    server: https://kubernetes.default.svc
+  project: k8s-home
+  source:
+    path: apps/proxmox
+    repoURL: https://github.com/alexvegas22/k8s-home.git
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
