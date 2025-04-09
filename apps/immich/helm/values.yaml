@@ -1,9 +1,3 @@
-## This chart relies on the common library chart from bjw-s
-## You can find it at https://github.com/bjw-s/helm-charts/tree/main/charts/library/common
-## Refer there for more detail about the supported values
-
-# These entries are shared between all the Immich components
-
 env:
   REDIS_HOSTNAME: '{{ printf "%s-redis-master" .Release.Name }}'
   DB_HOSTNAME: "{{ .Release.Name }}-postgresql"
@@ -19,7 +13,7 @@ image:
 immich:
   metrics:
     # Enabling this will create the service monitors needed to monitor immich with the prometheus operator
-    enabled: false
+    enabled: true
   persistence:
     # Main data store for all photos shared between different components.
     library:
@@ -44,9 +38,27 @@ immich:
 # See https://github.com/immich-app/immich-charts/issues/149 for more detail.
 postgresql:
   enabled: false
+  image:
+    repository: tensorchord/pgvecto-rs
+    tag: pg14-v0.2.0@sha256:739cdd626151ff1f796dc95a6591b55a714f341c737e27f045019ceabf8e8c52
+  global:
+    postgresql:
+      auth:
+        username: immich
+        database: immich
+        password: immich
+  primary:
+    containerSecurityContext:
+      readOnlyRootFilesystem: false
+    initdb:
+      scripts:
+        create-extensions.sql: |
+          CREATE EXTENSION cube;
+          CREATE EXTENSION earthdistance;
+          CREATE EXTENSION vectors;
 
 redis:
-  enabled: true
+  enabled: false
   architecture: standalone
   auth:
     enabled: false
@@ -54,38 +66,7 @@ redis:
 # Immich components
 
 server:
-  enabled: true
-  image:
-    repository: ghcr.io/immich-app/immich-server
-    pullPolicy: IfNotPresent
-  ingress:
-    main:
-      enabled: false
-      annotations:
-        # proxy-body-size is set to 0 to remove the body limit on file uploads
-        nginx.ingress.kubernetes.io/proxy-body-size: "0"
-      hosts:
-        - host: immich.v34l.com
-          paths:
-            - path: "/"
-      tls: []
-
-  probes:
-    readiness:
-      custom: true
-      spec:
-        initialDelaySeconds: 345
-        periodSeconds: 10
-        timeoutSeconds: 5
-        failureThreshold: 3
-    startup:
-      custom: true
-      spec:
-        initialDelaySeconds: 45
-        timeoutSeconds: 5
-        ## This means it has a maximum of 5*30=150 seconds to start up before it fails
-        periodSeconds: 10
-        failureThreshold: 60 
+  enabled: false
 
 machine-learning:
   enabled: true
@@ -99,6 +80,6 @@ machine-learning:
       enabled: true
       size: 10Gi
       # Optional: Set this to pvc to avoid downloading the ML models every start.
-      type: emptyDir
+      type: pvc
       accessMode: ReadWriteMany
-      storageClass: "nfs-client"
+      storageClass: fs-pvc
