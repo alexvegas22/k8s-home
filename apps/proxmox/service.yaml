@@ -13,6 +13,7 @@ spec:
       port: 8006
       protocol: TCP
       targetPort: 8006
+  selector: {}
   sessionAffinity: None
 ---
 apiVersion: v1
