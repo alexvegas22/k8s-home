@@ -3,6 +3,10 @@ kind: Application
 metadata:
   name: v34l-blog
   namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+    argocd-image-updater.argoproj.io/image-list: website=ghcr.io/alexvegas22/0xv34l:latest
+    argocd-image-updater.argoproj.io/website.update-strategy: digest
 spec:
   destination:
     namespace: hugo
