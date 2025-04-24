@@ -4,5 +4,5 @@ metadata:
   name: argocd-namespace-manager
 rules:
   - apiGroups: [""]
-    resources: ["namespaces"]
-    verbs: ["get", "create"]
+    resources: ["*"]
+    verbs: ["*"]
