@@ -2,6 +2,7 @@ global:
   domain: argocd.v34l.com
 
 server:
+  insecure: true
   ingress:
     enabled: false
 
@@ -13,6 +14,8 @@ server:
 
   config:
     admin.enabled: true
+    url: https://argocd.v34l.com
+    kustomize.buildOptions: "--enable-helm"
 
 dex:
   enabled: false

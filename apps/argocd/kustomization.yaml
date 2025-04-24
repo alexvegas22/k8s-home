@@ -6,7 +6,7 @@ kind: Kustomization
 
 resources:
   - resources/ingress.yaml
-  - patch-argocd-cm.yaml
+
 helmCharts:
 - name: argo-cd
   repo: oci://ghcr.io/argoproj/argo-helm
