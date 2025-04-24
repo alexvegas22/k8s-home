@@ -4,9 +4,19 @@ kind: Kustomization
 resources:
   - resources/ingress.yaml
 
-patchesStrategicMerge:
-  - patch-argocd-cm.yaml
-
+patches:
+  - target:
+      kind: ConfigMap
+      name: argocd-cm
+      namespace: argocd
+    patch: |-
+      apiVersion: v1
+      kind: ConfigMap
+      metadata:
+        name: argocd-cm
+        namespace: argocd
+      data:
+        kustomize.buildOptions: --enable-helm
 helmCharts:
 - name: argo-cd
   repo: oci://ghcr.io/argoproj/argo-helm
