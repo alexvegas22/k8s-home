@@ -1,15 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: proxmox
+  name: argocd
   namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
 spec:
   destination:
-    namespace: proxmox
+    namespace: argocd
     server: https://kubernetes.default.svc
   project: k8s-home
   source:
-    path: apps/proxmox
+    path: apps/argocd
     repoURL: https://github.com/alexvegas22/k8s-home.git
     targetRevision: HEAD
   syncPolicy:
