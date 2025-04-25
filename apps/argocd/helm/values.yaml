@@ -15,7 +15,12 @@ server:
   config:
     admin.enabled: true
     url: https://argocd.v34l.com
-    kustomize.buildOptions: "--enable-helm"
+
+configs:
+  cm:
+    create: true
+    url: https://argocd.v34l.com
+    kustomize.buildOptions: --enable-helm
 
 dex:
   enabled: false
