@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: htb-ws
-        image: ghcr.io/alexvegas22/htb-ws:main
+        image: ghcr.io/alexvegas22/htb:websocket-5d5013d16e5485ecfab8f5d70dfa0109c811c85a
         imagePullPolicy: Always
         ports:
         - containerPort: 443
