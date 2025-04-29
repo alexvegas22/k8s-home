@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: htb-ws
-        image: harbor-core.harbor.svc.cluster.local/htb/htb-ws:latest
+        image: ghcr.io/alexvegas22/htb-backend:main
         imagePullPolicy: Always
         ports:
         - containerPort: 443
