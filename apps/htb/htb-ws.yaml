@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: htb-ws
-        image: ghcr.io/alexvegas22/htb-backend:main
+        image: ghcr.io/alexvegas22/htb-ws:main
         imagePullPolicy: Always
         ports:
         - containerPort: 443
@@ -43,8 +43,8 @@ metadata:
   namespace: htb
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-staging
-    traefik.ingress.kubernetes.io/router.tls: "true" # Enables HTTPS
-    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure # Allow both HTTP and HTTPS
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
     ingressclass.kubernetes.io/is-default-class: "true"
 spec:
   rules:
@@ -61,4 +61,4 @@ spec:
   tls:
     - hosts:
       - ws.htb.v34l.com
-      secretName: htb-secret
+      secretName: htb-ws-secret
