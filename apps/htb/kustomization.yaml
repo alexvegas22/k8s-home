@@ -3,7 +3,7 @@ kind: Kustomization
 metadata:
   name: htb-app
 resources:
-  - htb-frontend
-  - htb-api
-  - htb-ws
+  - ./htb-frontend
+  - ./htb-api
+  - ./htb-ws
   - redis-deployment.yaml
