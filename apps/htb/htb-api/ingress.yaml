@@ -11,7 +11,7 @@ metadata:
     ingressclass.kubernetes.io/is-default-class: "true"
 spec:
   rules:
-  - host: htb.v34l.com
+  - host: api.htb.v34l.com
     http:
       paths:
       - path: /
@@ -23,5 +23,5 @@ spec:
               number: 80
   tls:
     - hosts:
-      - htb.v34l.com
+      - api.htb.v34l.com
       secretName: htb-api-secret
