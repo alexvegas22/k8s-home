@@ -20,6 +20,6 @@ spec:
         - containerPort: 80
         env:
         - name: REDIS_HOST
-          value: "redis"
+          value: "redis-htb-service"
         - name: REDIS_PORT
           value: "6379"
