@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: htb-frontend
+  namespace: htb
+  labels:
+    app: htb-frontend
+spec:
+  ports:
+  - port: 80
+    targetPort: 80
+  selector:
+    app: htb-frontend
+  type: ClusterIP

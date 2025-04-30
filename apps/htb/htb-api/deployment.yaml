@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: htb-api
+  namespace: htb
+spec:
+  selector:
+    matchLabels:
+      app: htb-api
+  template:
+    metadata:
+      labels:
+        app: htb-api
+    spec:
+      containers:
+      - name: htb-api
+        image: ghcr.io/alexvegas22/htb-api:api-f30bcbf6773ff0bb8cb3e592c9472927a84840a2
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        env:
+        - name: REDIS_HOST
+          value: "redis"
+        - name: REDIS_PORT
+          value: "6379"

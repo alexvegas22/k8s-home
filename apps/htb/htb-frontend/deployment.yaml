@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: htb-frontend
+  namespace: htb
+spec:
+  selector:
+    matchLabels:
+      app: htb-frontend
+  template:
+    metadata:
+      labels:
+        app: htb-frontend
+    spec:
+      containers:
+      - name: htb-frontend
+        image: ghcr.io/alexvegas22/htb:frontend-5d5013d16e5485ecfab8f5d70dfa0109c811c85a
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        env:
+        - name: VITE_API_URL
+          value: "http://api.htb.v34l.com"
+        - name: VITE_API_PORT
+          value: "5000"
+        - name: VITE_WEBSOCKET_URL
+          value: "ws://ws.htb.v34l.com"
+        - name: VITE_WEBSOCKET_PORT
+          value: "8990"

@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: htb-ws
+  namespace: htb
+spec:
+  selector:
+    matchLabels:
+      app: htb-ws
+  template:
+    metadata:
+      labels:
+        app: htb-ws
+    spec:
+      containers:
+      - name: htb-ws
+        image: ghcr.io/alexvegas22/htb:websocket-5d5013d16e5485ecfab8f5d70dfa0109c811c85a
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 443
+        env:
+        - name: WEBSOCKET_PORT
+          value: "8990"
