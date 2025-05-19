@@ -3,6 +3,8 @@ kind: Kustomization
 
 resources:
   - resources/ingress.yaml
+  - postgres.yaml
+
 helmCharts:
   - name: immich
     version: "0.9.1"
@@ -10,9 +12,3 @@ helmCharts:
     releaseName: "immich"
     namespace: cloud
     valuesFile: "helm/values.yaml"
-  - name: postgresql
-    # version: "16.4.16"
-    repo: https://charts.bitnami.com/bitnami
-    releaseName: "postgres"
-    namespace: cloud
-    valuesFile: "postgres/values.yaml"
