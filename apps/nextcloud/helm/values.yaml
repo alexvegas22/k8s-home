@@ -76,32 +76,3 @@ resources:
   limits:
     memory: "1Gi"
     cpu: "1"
-
-livenessProbe:
-  enabled: true
-  initialDelaySeconds: 20
-  periodSeconds: 10
-  timeoutSeconds: 5
-  failureThreshold: 3
-  successThreshold: 1
-
-readinessProbe:
-  enabled: false
-  initialDelaySeconds: 240
-  periodSeconds: 10
-  timeoutSeconds: 5
-  failureThreshold: 3
-  successThreshold: 1
-
-startupProbe:
-  enabled: false
-  exec:
-    command:
-      - /bin/sh
-      - -c
-      - "curl -f http://localhost:80/status.php || exit 1"
-  initialDelaySeconds: 240
-  periodSeconds: 10
-  timeoutSeconds: 5
-  failureThreshold: 60
-  successThreshold: 1

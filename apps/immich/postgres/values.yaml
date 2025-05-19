@@ -1,0 +1,19 @@
+postgresql:
+  enabled: true
+  postgresqlUsername: immich
+  postgresqlPassword: root
+  postgresqlDatabase: immich
+  primary:
+    configuration:
+      shared_preload_libraries: "pgvector"
+
+  replica:
+    enabled: false
+
+pvc:
+  storageClass: "nfs-client"
+  size: 5Gi
+
+extensions:
+  enabled:
+    - pgvector
