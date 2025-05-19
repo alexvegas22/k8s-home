@@ -21,7 +21,7 @@ nextcloud:
   trustedDomains:
     - nextcloud.v34l.com
     - localhost
-    
+
 internalDatabase:
   enabled: false
 
@@ -37,10 +37,10 @@ postgresql:
   primary:
     persistence:
       enabled: true
-      storageClass: "csi-rbd-sc"
+      storageClass: "local-path"
       accessMode: ReadWriteOnce
-      size: 5Gi
-  
+      size: 3Gi
+
 redis:
   enabled: true
   architecture: standalone
@@ -76,7 +76,7 @@ resources:
   limits:
     memory: "1Gi"
     cpu: "1"
-    
+
 livenessProbe:
   enabled: true
   initialDelaySeconds: 20
