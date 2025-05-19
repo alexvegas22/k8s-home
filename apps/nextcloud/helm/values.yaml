@@ -60,12 +60,12 @@ persistence:
   mountPath: /var/www/html/data
   nextcloudConfig:
     enabled: true
-    storageClass: "csi-rbd-sc"
+    storageClass: "local-path"
     accessMode: ReadWriteOnce
     size: 2Gi
   nextcloudDatabase:
     enabled: true
-    storageClass: "csi-rbd-sc"
+    storageClass: "local-path"
     accessMode: ReadWriteOnce
     size: 5Gi
 
