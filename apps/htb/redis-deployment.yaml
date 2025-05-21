@@ -47,7 +47,7 @@ metadata:
   name: redis-pvc
   namespace: htb
 spec:
-  storageClassName: csi-rbd-sc
+  storageClassName: local-path
   accessModes:
     - ReadWriteOnce
   resources:
