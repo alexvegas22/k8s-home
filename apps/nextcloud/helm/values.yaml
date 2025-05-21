@@ -77,14 +77,14 @@ resources:
     memory: "1Gi"
     cpu: "1"
 livenessProbe:
-  enabled: true
+  enabled: false
   initialDelaySeconds: 300
   periodSeconds: 30
   timeoutSeconds: 5
   failureThreshold: 5
   successThreshold: 1
 readinessProbe:
-  enabled: true
+  enabled: false
   initialDelaySeconds: 300
   periodSeconds: 30
   timeoutSeconds: 5
