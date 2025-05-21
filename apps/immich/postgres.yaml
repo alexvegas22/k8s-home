@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: postgresql
-          image: postgres:16.4
+          image: tensorchord/pgvecto-rs
           env:
             - name: POSTGRES_USER
               value: immich
