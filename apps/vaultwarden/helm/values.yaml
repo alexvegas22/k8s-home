@@ -1,7 +1,3 @@
-## Instruction: when adding a new value, follow https://github.com/dani-garcia/vaultwarden/blob/main/.env.template as much as possible.
-
-## @section Kubernetes settings
-##
 image:
   ## @param image.registry Vaultwarden image registry
   ##
@@ -719,51 +715,4 @@ service:
 ## Refer to the README for some examples
 ##
 ingress:
-  ## @param ingress.enabled Deploy an ingress resource.
-  ##
   enabled: false
-  ## @param ingress.class Ingress resource class
-  ## The Ingress class to use, e. g. "nginx" for a nginx ingress controller or "alb" for a AWS LB controller.
-  #
-  class: "nginx"
-  ## @param ingress.nginxIngressAnnotations Add nginx specific ingress annotations
-  ## These annotations only make sense for the kubernetes nginx ingress controller (https://kubernetes.github.io/ingress-nginx/)
-  ##
-  nginxIngressAnnotations: true
-  ## @param ingress.additionalAnnotations Additional annotations for the ingress resource.
-  ##
-  additionalAnnotations: {}
-  ## @param ingress.labels Additional labels for the ingress resource.
-  ##
-  labels: {}
-  ## @param ingress.tls Enable TLS on the ingress resource.
-  ##
-  tls: true
-  ## @param ingress.hostname Hostname for the ingress.
-  ##
-  hostname: "warden.contoso.com"
-  ## @param ingress.additionalHostnames Additional hostnames for the ingress.
-  ##
-  additionalHostnames: []
-  ## @param ingress.path Default application path for the ingress
-  ##
-  path: "/"
-  ## @param ingress.pathType Path type for the ingress
-  ## Ref: https://kubernetes.io/docs/concepts/services-networking/ingress/
-  ##
-  pathType: "Prefix"
-  ## @param ingress.tlsSecret Kubernetes secret containing the SSL certificate when using the "nginx" class.
-  ##
-  tlsSecret: ""
-  ## @param ingress.nginxAllowList Comma-separated list of IP addresses and subnets to allow.
-  ##
-  nginxAllowList: ""
-  ## @param ingress.customHeadersConfigMap ConfigMap containing custom headers to be added to the ingress.
-  ## Requirement: First define the allowed response headers in global-allowed-response-headers.
-  ## Ref: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#custom-headers
-  ##
-  customHeadersConfigMap: {}
-  ## TODO:
-  ##   - Add support for using cert-manager.
-  ##   - Support for multiple TLS hostnames.
-  ##
