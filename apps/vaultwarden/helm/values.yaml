@@ -388,7 +388,7 @@ eventsDayRetain: ""
 ## @param domain Domain name where the application is accessed
 ## Example: https://warden.contoso.com:8443
 ##
-domain: ""
+domain: "https://vaultwarden.v34l.com"
 
 ## @param sendsAllowed Controls whether users are allowed to create Bitwarden Sends.
 ##
@@ -435,7 +435,7 @@ signupsVerify: "true"
 ## @param signupDomains List of domain names for users allowed to register. For example:
 ## example.com,example.net,example.org.
 ##
-signupDomains: ""
+signupDomains: "vaultwarden.v34l.com"
 
 ## @param orgEventsEnabled Controls whether event logging is enabled for organizations
 ##
