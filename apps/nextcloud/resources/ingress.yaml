@@ -34,6 +34,7 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
     traefik.ingress.kubernetes.io/router.tls: "true"
+    traefik.ingress.kubernetes.io/router.middlewares: cloud.redirect-to-https
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     ingressclass.kubernetes.io/is-default-class: "true"
 spec:
@@ -54,3 +55,13 @@ spec:
       - collabora.nextcloud.v34l.com
       - collabora.v34l.com
       secretName: collabora-secret
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: redirect-to-https
+  namespace: cloud
+spec:
+  redirectScheme:
+    scheme: https
+    permanent: true
