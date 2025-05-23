@@ -97,3 +97,52 @@ startupProbe:
   timeoutSeconds: 5
   failureThreshold: 30
   successThreshold: 1
+
+collabora:
+  enabled: true
+
+  autoscaling:
+    # enable autocaling, please check collabora README.md first
+    enabled: false
+
+  collabora:
+    ## HTTPS nextcloud domain, if needed
+    aliasgroups:
+       - host: "https://nextcloud.v34l.com:443"
+
+    # set extra parameters for collabora
+    # you may need to add --o:ssl.termination=true
+    extra_params: --o:ssl.enable=false
+
+    ## Specify server_name when the hostname is not reachable directly for
+    # example behind reverse-proxy. example: collabora.domain
+    server_name: collabora.nextcloud.v34l.com
+
+    existingSecret:
+      # set to true to to get collabora admin credentials from an existin secret
+      # if set, ignores collabora.collabora.username and password
+      enabled: true
+      # name of existing Kubernetes Secret with collboara admin credentials
+      secretName: "collabora-secret"
+      usernameKey: "username"
+      passwordKey: "password"
+
+  # setup ingress
+  ingress:
+    # enable ingress for collabora online
+    enabled: false
+    className: ""
+    # please check collabora values.yaml for nginx/haproxy annotations examples
+    annotations: {}
+    hosts:
+      - host: chart-example.local
+        paths:
+        - path: /
+          pathType: ImplementationSpecific
+    tls: []
+    #  - secretName: collabora-ingress-tls
+    #    hosts:
+    #      - collabora.domain
+
+  # see collabora helm README.md for recommended values
+  resources: {}
