@@ -21,9 +21,10 @@ nextcloud:
   trustedDomains:
     - nextcloud.v34l.com
     - localhost
-  phpClientHttpsFix:
-    enabled: true
-    protocol: https
+
+phpClientHttpsFix:
+  enabled: true
+  protocol: https
 
 internalDatabase:
   enabled: false
