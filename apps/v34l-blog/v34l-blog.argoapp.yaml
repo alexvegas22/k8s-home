@@ -13,7 +13,7 @@ spec:
     server: https://kubernetes.default.svc
   project: k8s-home
   source:
-    path: apps/v34l-blog
+    path: apps/v34l-blog/resources
     repoURL: https://github.com/alexvegas22/k8s-home.git
     targetRevision: HEAD
   syncPolicy:

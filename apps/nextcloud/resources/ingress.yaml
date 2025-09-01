@@ -6,8 +6,7 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
     traefik.ingress.kubernetes.io/router.tls: "true"
-    traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
-    ingressclass.kubernetes.io/is-default-class: "true"
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
 spec:
   ingressClassName: traefik
   rules:
@@ -33,9 +32,8 @@ metadata:
   namespace: cloud
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
-    traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
-    ingressclass.kubernetes.io/is-default-class: "true"
 spec:
   ingressClassName: traefik
   rules:

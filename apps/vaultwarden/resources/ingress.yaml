@@ -4,22 +4,21 @@ metadata:
   name: vaultwarden-ingress
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
-    traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
-    ingressclass.kubernetes.io/is-default-class: "true"
+    traefik.ingress.kubernetes.io/router.tls: "true"
 spec:
   ingressClassName: traefik
   rules:
-  - host: vaultwarden.v34l.com
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: vaultwarden
-            port:
-              number: 80
+    - host: vaultwarden.v34l.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: vaultwarden
+                port:
+                  number: 80
   tls:
     - hosts:
       - vaultwarden.v34l.com

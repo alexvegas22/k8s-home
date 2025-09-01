@@ -4,5 +4,5 @@ metadata:
   name: v34l-blog-app
   namespace: hugo
 resources:
-  - deployment.yaml
+  - ../base/deployment.yaml
   - ingress.yaml
