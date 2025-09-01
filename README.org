@@ -7,16 +7,5 @@ These are my config files for my home kubernetes setup
 
 * Services
 Here's a list of services I'm currently hosting :
- - Immich
  - Nexctcloud
- - Vault
  - Vaultwarden
-
-* Tasks to do
-** k3s
-  - Deploy a second control plane on a separate node
-  - Deploy 2 more workers
-** Ceph RBD
-  - get new drives
-** Immich
-  - fix postgres db
