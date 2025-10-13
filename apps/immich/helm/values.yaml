@@ -15,12 +15,12 @@ immich:
     library:
       existingClaim: fs-pvc
   configuration: {}
-    trash:
-      enabled: false
-      days: 30
-    storageTemplate:
-      enabled: true
-      template: "{{y}}/{{y}}-{{MM}}-{{dd}}/{{filename}}"
+    # trash:
+    #   enabled: false
+    #   days: 30
+    # storageTemplate:
+    #   enabled: true
+    #   template: "{{y}}/{{y}}-{{MM}}-{{dd}}/{{filename}}"
 
 valkey:
   enabled: true
