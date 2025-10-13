@@ -7,7 +7,7 @@ resources:
 
 helmCharts:
   - name: immich
-    version: "0.9.1"
+    version: "0.10.0"
     repo: https://immich-app.github.io/immich-charts
     releaseName: "immich"
     namespace: cloud
