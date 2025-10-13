@@ -1,49 +1,73 @@
-env:
-  REDIS_HOSTNAME: '{{ printf "%s-redis-master" .Release.Name }}'
-  DB_HOSTNAME: db-postgresql.cloud.svc.cluster.local
-  DB_USERNAME: immich
-  DB_DATABASE_NAME: immich
-  IMMICH_MACHINE_LEARNING_URL: '{{ printf "http://%s-machine-learning:3003" .Release.Name }}'
-
-postgresql.global.postgresql.auth.existingSecret: postgres-secret
-image:
-  tag: v1.119.0
+controllers:
+  main:
+    containers:
+      main:
+        image:
+          tag: v2.0.0
+        env:
+          REDIS_HOSTNAME: '{{ printf "%s-valkey" .Release.Name }}'
+          IMMICH_MACHINE_LEARNING_URL: '{{ printf "http://%s-machine-learning:3003" .Release.Name }}'
 
 immich:
   metrics:
     enabled: false
-
-redis:
-  enabled: true
-  architecture: standalone
-  auth:
-    enabled: false
-
-immich:
   persistence:
     library:
       existingClaim: fs-pvc
+  configuration: {}
+    trash:
+      enabled: false
+      days: 30
+    storageTemplate:
+      enabled: true
+      template: "{{y}}/{{y}}-{{MM}}-{{dd}}/{{filename}}"
+
+valkey:
+  enabled: true
+  controllers:
+    main:
+      containers:
+        main:
+          image:
+            repository: docker.io/valkey/valkey
+            tag: 8.1-alpine@sha256:e706d1213aaba6896c162bb6a3a9e1894e1a435f28f8f856d14fab2e10aa098b
+            pullPolicy: IfNotPresent
+  persistence:
+    data:
+      enabled: true
+      size: 5Gi
+      type: persistentVolumeClaim
+      accessMode: ReadWriteOnce
+      storageClass: nfs-client
 
 server:
   enabled: true
-  image:
-    repository: ghcr.io/immich-app/immich-server
-    pullPolicy: IfNotPresent
+  controllers:
+    main:
+      containers:
+        main:
+          image:
+            repository: ghcr.io/immich-app/immich-server
+            pullPolicy: IfNotPresent
   ingress:
     main:
       enabled: false
 
 machine-learning:
   enabled: true
-  image:
-    repository: ghcr.io/immich-app/immich-machine-learning
-    pullPolicy: IfNotPresent
-  env:
-    TRANSFORMERS_CACHE: /cache
+  controllers:
+    main:
+      containers:
+        main:
+          image:
+            repository: ghcr.io/immich-app/immich-machine-learning
+            pullPolicy: IfNotPresent
+          env:
+            TRANSFORMERS_CACHE: /cache
   persistence:
     cache:
       enabled: true
       size: 10Gi
-      type: pvc
+      type: persistentVolumeClaim
       accessMode: ReadWriteMany
       storageClass: nfs-client
