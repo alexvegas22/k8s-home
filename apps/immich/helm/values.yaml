@@ -11,6 +11,8 @@ controllers:
           DB_USERNAME: immich
           DB_DATABASE_NAME: immich
 
+postgresql.global.postgresql.auth.existingSecret: postgres-secret
+
 immich:
   metrics:
     enabled: false
