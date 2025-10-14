@@ -5,4 +5,5 @@ metadata:
   namespace: hugo
 resources:
   - base/deployment.yaml
+  - base/service.yaml
   - resources/ingress.yaml

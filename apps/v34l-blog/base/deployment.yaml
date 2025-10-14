@@ -22,16 +22,3 @@ spec:
             limits:
               memory: "128Mi"
               cpu: "250m"
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: v34l-blog-service
-spec:
-  selector:
-    app: v34l-blog
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 80
-  type: ClusterIP
