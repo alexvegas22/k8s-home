@@ -19,7 +19,7 @@ spec:
           service:
             name: immich
             port:
-              number: 80
+              number: 2283
   tls:
     - hosts:
       - immich.v34l.com
