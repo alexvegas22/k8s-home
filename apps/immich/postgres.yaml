@@ -16,7 +16,7 @@ spec:
       database: immich
       owner: immich
       secret:
-        name: cnpg-secret
+        name: immich-cnpg-secret
       postInitApplicationSQL:
         - CREATE EXTENSION vchord CASCADE;
         - CREATE EXTENSION earthdistance CASCADE;
