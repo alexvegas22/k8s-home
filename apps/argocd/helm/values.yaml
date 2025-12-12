@@ -21,6 +21,11 @@ configs:
     create: true
     url: https://argocd.v34l.com
     kustomize.buildOptions: --enable-helm
+  secret:
+    githubSecret:
+      secretKeyRef:
+        name: argocd-webhook
+        key: github-secret-key
 
 dex:
   enabled: false
