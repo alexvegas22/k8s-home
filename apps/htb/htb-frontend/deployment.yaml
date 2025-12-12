@@ -22,4 +22,4 @@ spec:
         - name: VITE_API_URL
           value: "https://api.htb.v34l.com"
         - name: VITE_WEBSOCKET_URL
-          value: "ws://ws.htb.v34l.com"
+          value: "wss://ws.htb.v34l.com"
