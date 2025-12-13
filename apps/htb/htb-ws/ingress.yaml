@@ -5,7 +5,7 @@ metadata:
   name: htb-ws-ingress
   namespace: htb
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-staging
+    cert-manager.io/cluster-issuer: letsencrypt-prod
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
     ingressclass.kubernetes.io/is-default-class: "true"
