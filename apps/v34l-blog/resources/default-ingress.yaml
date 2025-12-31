@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: v34l-blog-ingress
+  name: v34l-root-ingress
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
@@ -9,7 +9,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-    - host: blog.v34l.com
+    - host: v34l.com
       http:
         paths:
           - path: /
@@ -22,5 +22,5 @@ spec:
 
   tls:
     - hosts:
-      - blog.v34l.com
-      secretName: blog-secret
+      - v34l.com
+      secretName: root-secret
