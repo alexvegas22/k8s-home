@@ -20,7 +20,7 @@ metadata:
   name: jg1g-ingress
   namespace: jg1g
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-prod
+    cert-manager.io/cluster-issuer: letsencrypt-staging
     traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
     ingressclass.kubernetes.io/is-default-class: "true"
     traefik.frontend.passHostHeader: "false"
