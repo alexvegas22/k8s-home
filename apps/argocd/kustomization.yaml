@@ -8,7 +8,7 @@ resources:
 helmCharts:
 - name: argo-cd
   repo: oci://ghcr.io/argoproj/argo-helm
-  version: 7.8.23
+  version: 9.2.3
   releaseName: argocd
   apiVersions:
   - monitoring.coreos.com/v1
