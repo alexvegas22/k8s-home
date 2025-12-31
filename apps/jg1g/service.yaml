@@ -36,7 +36,3 @@ spec:
             name: jg1g
             port:
               number: 443
-  tls:
-    - hosts:
-      - jg1g.com
-      secretName: jg1g-secret
