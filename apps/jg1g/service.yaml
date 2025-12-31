@@ -20,6 +20,7 @@ metadata:
   name: jg1g-ingress
   namespace: jg1g
   annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
     traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
     ingressclass.kubernetes.io/is-default-class: "true"
     traefik.frontend.passHostHeader: "false"
@@ -34,4 +35,8 @@ spec:
           service:
             name: jg1g
             port:
-              number: 80
+              number: 443
+  tls:
+    - hosts:
+      - jg1g.com
+      secretName: jg1g-secret
