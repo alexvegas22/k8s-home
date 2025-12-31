@@ -19,7 +19,19 @@ spec:
                 name: v34l-blog-service
                 port:
                   number: 80
+    - host: v34l.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: v34l-blog-service
+                port:
+                  number: 80
   tls:
     - hosts:
       - blog.v34l.com
       secretName: blog-secret
+      - v34l.com
+      secretName: blog-secret-2
