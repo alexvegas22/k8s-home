@@ -8,7 +8,7 @@ metadata:
 spec:
   project: k8s-home
   source:
-    repoURL: ssh://github.com/alexvegas22/k8s-home.git
+    repoURL: git@github.com/alexvegas22/k8s-home.git
     targetRevision: HEAD
     path: .
     directory:
