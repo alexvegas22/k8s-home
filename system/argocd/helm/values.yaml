@@ -1,0 +1,43 @@
+global:
+  domain: argocd.v34l.com
+
+server:
+  insecure: true
+  ingress:
+    enabled: false
+
+  extraArgs:
+    - --insecure
+
+  service:
+    type: ClusterIP
+
+  config:
+    admin.enabled: true
+    url: https://argocd.v34l.com
+
+configs:
+  cm:
+    create: true
+    url: https://argocd.v34l.com
+    kustomize.buildOptions: --enable-helm
+  # secret:
+  #   githubSecret:
+  #     secretKeyRef:
+  #       name: argocd-webhook
+  #       key: github-secret-key
+
+dex:
+  enabled: false
+
+controller:
+  metrics:
+    enabled: true
+
+repoServer:
+  metrics:
+    enabled: true
+
+applicationSet:
+  metrics:
+    enabled: true
