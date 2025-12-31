@@ -1,0 +1,31 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: jg1g
+spec:
+  type: ExternalName
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+    - name: https
+      port: 443
+      targetPort: 443
+  externalName: 192.168.1.5
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: jg1g-ingress
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.frontend.passHostHeader: "false"
+spec:
+    rules:
+    - host: jg1g.com
+      http:
+        paths:
+        - path: /
+          backend:
+            serviceName: jg1g
+            servicePort: https
