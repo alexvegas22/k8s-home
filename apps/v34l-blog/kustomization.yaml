@@ -7,3 +7,4 @@ resources:
   - base/deployment.yaml
   - base/service.yaml
   - resources/ingress.yaml
+  - resources/default-ingress.yaml
