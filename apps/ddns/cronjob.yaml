@@ -10,7 +10,7 @@ spec:
         spec:
           containers:
           - name: cloudflare-dns-updater
-            image: ghcr.io/alexvegas22/cloudflare-dns-updater:main
+            image: ghcr.io/alexvegas22/cloudflare-dns-updater:latest
             env:
             - name: CLOUDFLARE_API_TOKEN
               valueFrom:
