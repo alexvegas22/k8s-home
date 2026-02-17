@@ -1,0 +1,7 @@
+keys
+*secret.yaml
+/system/ceph/ceph.org
+/apps/vault/ca.crt
+/system/secrets/
+/apps/argocd/charts/
+charts/
