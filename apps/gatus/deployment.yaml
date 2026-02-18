@@ -20,6 +20,10 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
+          volumeMounts:
+            - name: config-volume
+              mountPath: /config/config.yaml
+              readOnly: true
           resources:
             requests:
               cpu: 100m
@@ -38,3 +42,7 @@ spec:
               drop: [ALL]
             seccompProfile:
               type: RuntimeDefault
+      volumes:
+        - name: config-volume
+          configMap:
+            name: gatus-config
