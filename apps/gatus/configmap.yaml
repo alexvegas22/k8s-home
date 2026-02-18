@@ -9,3 +9,9 @@ data:
       basic:
         username: "alex.vegas"
         password-bcrypt-base64: "JDJhJDEyJDZTN3c1dEFnTFNqYXdVcERZbnhmME9pcU9qbWZ3R2Q1b0wud0EwSjBTWVJYVDJBQmJ0bGRL"
+    endpoints:
+      - name: blog.v34l.com
+        url: https://blog.v34l.com
+        interval: 30s
+        conditions:
+          - "[STATUS]==200"
