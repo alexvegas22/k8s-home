@@ -35,3 +35,8 @@ data:
         interval: 30s
         conditions:
           - "[STATUS] == 200"
+      - name: argocd
+        url: https://argocd.v34l.com
+        interval: 30s
+        conditions:
+          - "[STATUS] == 200"
