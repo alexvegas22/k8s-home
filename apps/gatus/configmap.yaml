@@ -15,3 +15,23 @@ data:
         interval: 30s
         conditions:
           - "[STATUS] == 200"
+      - name: nextcloud
+        url: https://nextcloud.v34l.com
+        interval: 30s
+        conditions:
+          - "[STATUS] == 200"
+      - name: vaultwarden
+        url: https://vaultwarden.v34l.com
+        interval: 30s
+        conditions:
+          - "[STATUS] == 200"
+      - name: immich
+        url: https://immich.v34l.com
+        interval: 30s
+        conditions:
+          - "[STATUS] == 200"
+      - name: htb
+        url: https://htb.v34l.com
+        interval: 30s
+        conditions:
+          - "[STATUS] == 200"
