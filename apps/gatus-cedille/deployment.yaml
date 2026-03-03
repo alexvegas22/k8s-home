@@ -57,23 +57,9 @@ kind: PersistentVolumeClaim
 metadata:
   name: gatus-sqlite
 spec:
-  storageClassName: nfs-client
-  volumeMode: Filesystem
-  volumeName: gatus-sqlite
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
       storage: 5Gi
----
-   apiVersion: v1
-   kind: PersistentVolume
-   metadata:
-     name: gatus-sqlite
-   spec:
-     capacity:
-       storage: 5Gi
-     accessModes:
-       - ReadWriteOnce
-     persistentVolumeReclaimPolicy: Retain
-     storageClassName: nfs-client
+  storageClassName: nfs-client
