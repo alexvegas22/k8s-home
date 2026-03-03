@@ -50,7 +50,7 @@ redis:
   architecture: standalone
   persistence:
     enabled: true
-    storageClass: "csi-rbd-sc"
+    storageClass: "local-path"
     accessMode: ReadWriteOnce
     size: 2Gi
 

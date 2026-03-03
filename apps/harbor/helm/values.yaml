@@ -24,7 +24,7 @@ persistence:
   resourcePolicy: "keep"
   persistentVolumeClaim:
     registry:
-      storageClass: "csi-rbd-sc"
+      storageClass: "nfs-client"
       accessMode: ReadWriteOnce
       size: 10Gi
       annotations: {}
