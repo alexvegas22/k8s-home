@@ -24,6 +24,8 @@ spec:
             - name: config-volume
               mountPath: /config
               readOnly: true
+            - name: gatus-sqlite
+              mountPath: "/data"
           resources:
             requests:
               cpu: 100m
@@ -46,3 +48,18 @@ spec:
         - name: config-volume
           configMap:
             name: gatus-config
+        - name: gatus-sqlite
+          persistentVolumeClaim:
+            claimName: gatus-sqlite
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: gatus-sqlite
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: nfs-client

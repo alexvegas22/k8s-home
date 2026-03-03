@@ -5,6 +5,10 @@ metadata:
   name: gatus-config
 data:
   config.yaml: |
+    storage:
+      type: sqlite
+      path: /data/gatus.db
+
     endpoints:
       - name: blog-v34l
         url: https://blog.v34l.com
