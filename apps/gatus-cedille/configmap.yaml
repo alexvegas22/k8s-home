@@ -8,10 +8,8 @@ data:
     storage:
       type: sqlite
       path: /data/gatus.db
-
     web:
       port: 8080
-
     endpoints:
       - name: acets-prodv2-cedille-club
         group: production
@@ -20,25 +18,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
-
-      - name: aeroets-prodv2-cedille-club
-        group: production
-        url: "https://aeroets.prodv2.cedille.club/"
-        interval: 5m
-        conditions:
-          - "[STATUS] == 200"
-          - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
-
       - name: argocd-mgmtv2-cedille-club
         group: production
         url: "https://argocd.mgmtv2.cedille.club/"
@@ -46,12 +25,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
-
       - name: atelier-crabe-cedille-club
         group: production
         url: "https://atelier.crabe.cedille.club/"
@@ -59,12 +32,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
-
       - name: auth-etsmtl-club
         group: production
         url: "https://auth.etsmtl.club/"
@@ -72,11 +39,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: calidum-rotae-prodv2-cedille-club
         group: production
@@ -85,11 +47,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: campusparent-prodv2-cedille-club
         group: production
@@ -98,11 +55,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: cedille-etsmtl-ca
         group: production
@@ -111,11 +63,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: cedille-etsmtl-club
         group: production
@@ -124,11 +71,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: cedille-prodv2-cedille-club
         group: production
@@ -137,11 +79,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: collabora-nextcloud-etsmtl-club
         group: production
@@ -150,11 +87,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: comets-ets-com
         group: production
@@ -163,11 +95,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: comets-etsmtl-ca
         group: production
@@ -176,11 +103,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: comets-prodv2-cedille-club
         group: production
@@ -189,11 +111,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: commande-fraternitedupiranha-com
         group: production
@@ -202,11 +119,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: conjure-etsmtl-ca
         group: production
@@ -215,11 +127,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: coroot-etsmtl-club
         group: production
@@ -228,11 +135,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: coroot-prodv2-cedille-club
         group: production
@@ -241,11 +143,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: crabe-etsmtl-ca
         group: production
@@ -254,11 +151,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: docmost-etsmtl-club
         group: production
@@ -267,11 +159,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: dronolab-etsmtl-ca
         group: production
@@ -280,11 +167,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: esports-prodv2-cedille-club
         group: production
@@ -293,11 +175,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: evovelo-etsmtl-ca
         group: production
@@ -306,11 +183,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: evovelo-prodv2-cedille-club
         group: production
@@ -319,11 +191,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: forom-prodv2-cedille-club
         group: production
@@ -332,11 +199,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: git-etsmtl-club
         group: production
@@ -345,11 +207,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: grafana-prodv2-cedille-club
         group: production
@@ -358,11 +215,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: habitek-ca
         group: production
@@ -371,11 +223,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: habitek-prodv2-cedille-club
         group: production
@@ -384,11 +231,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: influxdb-prodv2-cedille-club
         group: production
@@ -397,11 +239,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: ingenieuses-ca
         group: production
@@ -410,11 +247,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: integrale-etsmtl-ca
         group: production
@@ -423,11 +255,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: jdgets-outlinewiki-prodv2-cedille-club
         group: production
@@ -436,11 +263,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: kubero-etsmtl-club
         group: production
@@ -449,11 +271,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: markets-algoets-ca
         group: production
@@ -462,11 +279,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: markets-dev-cedille-club
         group: staging
@@ -475,11 +287,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: markets-prodv2-cedille-club
         group: production
@@ -488,11 +295,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: matomo-etsmtl-club
         group: production
@@ -501,11 +303,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: matomo-prodv2-cedille-club
         group: production
@@ -514,11 +311,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: n8n-prodv2-cedille-club
         group: production
@@ -527,11 +319,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: nextcloud-etsmtl-club
         group: production
@@ -540,11 +327,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: penpot-prodv2-cedille-club
         group: production
@@ -553,11 +335,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: plane-prodv2-cedille-club
         group: production
@@ -566,11 +343,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: planifets-prodv2-cedille-club
         group: production
@@ -579,11 +351,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: planka-etsmtl-club
         group: production
@@ -592,11 +359,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: pr-241-cedille-prodv2-cedille-club
         group: production
@@ -605,11 +367,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: pr-259-cedille-prodv2-cedille-club
         group: production
@@ -618,11 +375,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: pr-72-synapse-prodv2-cedille-club
         group: production
@@ -631,11 +383,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: pr-73-synapse-prodv2-cedille-club
         group: production
@@ -644,11 +391,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: pr-77-synapse-prodv2-cedille-club
         group: production
@@ -657,11 +399,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: pr-85-synapse-prodv2-cedille-club
         group: production
@@ -670,11 +407,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: preci-etsmtl-ca
         group: production
@@ -683,11 +415,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: raconteurs-etsmtl-ca
         group: production
@@ -696,11 +423,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: saveursdegenie-etsmtl-ca
         group: production
@@ -709,11 +431,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: supabase-prodv2-cedille-club
         group: production
@@ -722,11 +439,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: synapsets-etsmtl-ca
         group: production
@@ -735,11 +447,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: trema-prodv2-cedille-club
         group: production
@@ -748,11 +455,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: twenty-prodv2-cedille-club
         group: production
@@ -761,11 +463,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: vault-etsmtl-club
         group: production
@@ -774,11 +471,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: vault-prodv2-cedille-club
         group: production
@@ -787,11 +479,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: vaultwarden-etsmtl-club
         group: production
@@ -800,11 +487,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: wiki-capra-etsmtl-ca
         group: production
@@ -813,11 +495,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: wiki-cedille-club
         group: production
@@ -826,11 +503,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
 
       - name: wiki-etsmtl-club
         group: production
@@ -839,12 +511,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
-
       - name: wiki-minikube-local
         group: production
         url: "https://wiki.minikube.local/"
@@ -852,12 +518,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
-
       - name: wiki-prodv2-cedille-club
         group: production
         url: "https://wiki.prodv2.cedille.club/"
@@ -865,12 +525,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
-
       - name: wiki-sonia-etsmtl-ca
         group: production
         url: "https://wiki.sonia.etsmtl.ca/"
@@ -878,12 +532,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
-
       - name: wiki-synapsets-prodv2-cedille-club
         group: production
         url: "https://wiki.synapsets.prodv2.cedille.club/"
@@ -891,12 +539,6 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
-
       - name: www-ingenieuses-ca
         group: production
         url: "https://www.ingenieuses.ca/"
@@ -904,8 +546,3 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: slack
-            enabled: false
-            failure-threshold: 3
-            success-threshold: 2
