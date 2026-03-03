@@ -58,20 +58,10 @@ metadata:
   name: gatus-sqlite
 spec:
   storageClassName: local-path
+  volumeMode: Filesystem
   volumeName: gatus-sqlite
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
       storage: 5Gi
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: gatus-sqlite
-spec:
-  storageClassName: local-path
-  capacity:
-    storage: 5Gi
-  accessModes:
-    - ReadWriteOnce
