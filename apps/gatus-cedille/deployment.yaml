@@ -57,7 +57,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: gatus-sqlite
 spec:
-  storageClassName: local-path
+  storageClassName: nfs-client
   volumeMode: Filesystem
   volumeName: gatus-sqlite
   accessModes:
