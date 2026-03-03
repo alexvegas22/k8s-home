@@ -24,6 +24,8 @@ spec:
             - name: config-volume
               mountPath: /config
               readOnly: true
+            - name: gatus-sqlite
+              mountPath: "/data"
           resources:
             requests:
               cpu: 100m
@@ -42,9 +44,6 @@ spec:
               drop: [ALL]
             seccompProfile:
               type: RuntimeDefault
-          volumeMounts:
-            - mountPath: "/data"
-              name: gatus-sqlite
       volumes:
         - name: config-volume
           configMap:
