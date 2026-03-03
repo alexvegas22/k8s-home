@@ -42,7 +42,26 @@ spec:
               drop: [ALL]
             seccompProfile:
               type: RuntimeDefault
+          volumeMounts:
+            - mountPath: "/data"
+              name: gatus-sqlite
       volumes:
         - name: config-volume
           configMap:
             name: gatus-config
+        - name: gatus-sqlite
+          persistentVolumeClaim:
+            claimName: gatus-sqlite
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: gatus-sqlite
+spec:
+  storageClassName: local-path
+  volumeName: gatus-sqlite
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi
