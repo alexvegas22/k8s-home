@@ -5,7 +5,7 @@ resources:
   - resources/ingress.yaml
 helmCharts:
   - name: nextcloud
-    version: "6.6.9"
+    version: "9.1.0"
     repo: https://nextcloud.github.io/helm/
     releaseName: "nextcloud"
     namespace: cloud

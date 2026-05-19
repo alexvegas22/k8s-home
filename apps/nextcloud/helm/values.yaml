@@ -138,18 +138,3 @@ collabora:
   ingress:
     # enable ingress for collabora online
     enabled: false
-    className: ""
-    # please check collabora values.yaml for nginx/haproxy annotations examples
-    annotations: {}
-    hosts:
-      - host: chart-example.local
-        paths:
-        - path: /
-          pathType: ImplementationSpecific
-    tls: []
-    #  - secretName: collabora-ingress-tls
-    #    hosts:
-    #      - collabora.domain
-
-  # see collabora helm README.md for recommended values
-  resources: {}
