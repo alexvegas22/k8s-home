@@ -48,6 +48,9 @@ postgresql:
 redis:
   enabled: true
   architecture: standalone
+  image:
+    registry: docker.io
+    repository: bitnamilegacy/redis
   persistence:
     enabled: true
     storageClass: "local-path"
