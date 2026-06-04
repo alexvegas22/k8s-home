@@ -59,10 +59,6 @@ redis:
   image:
     registry: docker.io
     repository: bitnamilegacy/redis
-  auth:
-    enabled: true
-    existingSecret: "redis-secret"
-    existingSecretPasswordKey: "password"
   persistence:
     enabled: true
     storageClass: "local-path"
