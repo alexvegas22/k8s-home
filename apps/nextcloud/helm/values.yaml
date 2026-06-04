@@ -43,9 +43,9 @@ postgresql:
     existingSecret: "postgres-secret"
         # Names of keys in existing secret to use for PostgreSQL credentials
     secretKeys:
-      adminPasswordKey: "admin"
-      userPasswordKey: "user"
-      replicationPasswordKey: "replication"
+      adminPasswordKey: "adminPasswordKey"
+      userPasswordKey: "userPasswordKey"
+      replicationPasswordKey: "replicationPasswordKey"
   primary:
     persistence:
       enabled: true
