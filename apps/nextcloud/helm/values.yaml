@@ -39,9 +39,13 @@ postgresql:
     repository: bitnamilegacy/postgresql
     tag: 16.6.0-debian-12-r2
   auth:
-    username: nextcloud
-    password: strongpassword
     database: nextcloud
+    existingSecret: "postgres-secret"
+        # Names of keys in existing secret to use for PostgreSQL credentials
+    secretKeys:
+      adminPasswordKey: "admin"
+      userPasswordKey: "user"
+      replicationPasswordKey: "replication"
   primary:
     persistence:
       enabled: true
@@ -54,7 +58,11 @@ redis:
   architecture: standalone
   image:
     registry: docker.io
-    repository: bitnamilegacy/postgresql
+    repository: bitnamilegacy/redis
+  auth:
+    enabled: true
+    existingSecret: "redis-secret"
+    existingSecretPasswordKey: "password"
   persistence:
     enabled: true
     storageClass: "local-path"
