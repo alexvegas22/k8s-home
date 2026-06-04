@@ -11,10 +11,23 @@ ingress:
 
 nextcloud:
   host: nextcloud.v34l.com
-  username: admin
-  password: root
   existingSecret:
-    enabled: false
+    enabled: true
+    secretName: nextcloud-creds
+    usernameKey: username
+    passwordKey: password
+  defaultConfigs:
+    reverse-proxy.config.php: true
+  configs:
+    trusted-proxy.config.php: |-
+      <?php
+      $CONFIG = array (
+        'trusted_proxies' => ['10.42.0.0/16'],
+        'overwriteprotocol' => 'https',
+        'overwritehost' => 'nextcloud.v34l.com',
+        'overwrite.cli.url' => 'https://nextcloud.v34l.com',
+        'forwarded_for_headers' => ['HTTP_X_FORWARDED_FOR'],
+      );
   update: 0
   containerPort: 80
   datadir: /var/www/html/data
