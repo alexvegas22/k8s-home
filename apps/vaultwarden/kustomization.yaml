@@ -5,7 +5,7 @@ resources:
   - resources/ingress.yaml
 helmCharts:
   - name: vaultwarden
-    version: "0.31.8"
+    version: "0.43.1"
     repo: https://guerzon.github.io/vaultwarden
     releaseName: "vaultwarden"
     namespace: vaultwarden
