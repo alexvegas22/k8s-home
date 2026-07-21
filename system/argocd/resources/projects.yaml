@@ -19,7 +19,7 @@ metadata:
 spec:
   sourceRepos:
     - 'https://github.com/alexvegas22/k8s-home.git'
-    - "git@github.com/alexvegas22/k8s-mist.git"
+    - "git@github.com:alexvegas22/k8s-home.git"
     - 'https://git.v34l.com/v34l/k8s-home.git'
   destinations:
     - namespace: '*'
