@@ -1,54 +1,24 @@
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
 metadata:
-  name: nextcloud-ingress
+  name: nextcloud
   namespace: cloud
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-prod
-    traefik.ingress.kubernetes.io/router.tls: "true"
-    traefik.ingress.kubernetes.io/router.entrypoints: websecure
 spec:
-  ingressClassName: traefik
+  parentRefs:
+    - name: main-gateway
+      namespace: gateway
+      sectionName: https
+
+  hostnames:
+    - nextcloud.v34l.com
+
   rules:
-  - host: nextcloud.v34l.com
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: nextcloud
-            port:
-              number: 80
-  tls:
-    - hosts:
-      - nextcloud.v34l.com
-      secretName: nextcloud-secret
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: collabora-ingress
-  namespace: cloud
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-prod
-    traefik.ingress.kubernetes.io/router.entrypoints: websecure
-    traefik.ingress.kubernetes.io/router.tls: "true"
-spec:
-  ingressClassName: traefik
-  rules:
-  - host: collabora.nextcloud.v34l.com
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: collabora
-            port:
-              number: 80
-  tls:
-    - hosts:
-      - collabora.nextcloud.v34l.com
-      - collabora.v34l.com
-      secretName: collabora-secret
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+
+      backendRefs:
+        - name: nextcloud
+          port:
+            number: 80

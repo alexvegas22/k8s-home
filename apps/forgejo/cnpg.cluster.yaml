@@ -1,0 +1,42 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: postgresql-forgejo
+spec:
+  imageName: ghcr.io/cloudnative-pg/postgresql:17.2
+  instances: 3
+  bootstrap:
+    initdb:
+      database: forgejo
+      owner: forgejo
+      secret:
+        name: postgresql-forgejo-app
+  storage:
+    size: 5Gi
+    storageClass: local-path
+  walStorage:
+    size: 5Gi
+    storageClass: local-path
+  # backup:
+  #   retentionPolicy: 7d
+  #   volumeSnapshot:
+  #     className: csi-cephfsplugin-snapclass
+  # plugins:
+  #   - name: barman-cloud.cloudnative-pg.io
+  #     isWALArchiver: true
+  #     parameters:
+  #       barmanObjectName: cnpg-forgejo-b2
+---
+# apiVersion: postgresql.cnpg.io/v1
+# kind: ScheduledBackup
+# metadata:
+#   name: cnpg-backup-schedule-forgejo
+#   namespace: forgejo
+# spec:
+#   schedule: "0 40 6 * * * "
+#   backupOwnerReference: self
+#   cluster:
+#     name: postgresql-forgejo
+#   method: plugin
+#   pluginConfiguration:
+#     name: barman-cloud.cloudnative-pg.io

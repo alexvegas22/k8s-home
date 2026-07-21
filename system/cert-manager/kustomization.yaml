@@ -1,0 +1,6 @@
+namespace: cert-manager
+
+resources:
+   - issuer-prod.yaml
+   - issuer-staging.yaml
+   - namespace.yaml

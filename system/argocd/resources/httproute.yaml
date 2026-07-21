@@ -1,16 +1,15 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: immich
-  namespace: cloud
+  name: argocd
+  namespace: argocd
 spec:
   parentRefs:
     - name: main-gateway
       namespace: gateway
-      sectionName: https
 
   hostnames:
-    - immich.v34l.com
+    - argocd.v34l.com
 
   rules:
     - matches:
@@ -19,5 +18,5 @@ spec:
             value: /
 
       backendRefs:
-        - name: immich-server
-          port: 2283
+        - name: argocd-server
+          port: 80

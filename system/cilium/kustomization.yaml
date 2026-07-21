@@ -1,0 +1,8 @@
+namespace: gateway
+
+resources:
+  - gateway.yaml
+  - certificate.yaml
+  - namespace.yaml
+  - cilium-announce.yaml
+  - cilium-ip-pool.yaml

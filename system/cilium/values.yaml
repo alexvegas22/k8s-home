@@ -1,0 +1,74 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/cilium/cilium/refs/tags/v1.20.0-pre.4/install/kubernetes/cilium/values.schema.json
+
+{
+  cluster: {
+    name: "mist",
+  },
+  ipam: {
+    mode: "kubernetes",
+  },
+  kubeProxyReplacement: true,
+  loadBalancer: {
+    mode: "dsr",
+  },
+  ipv4NativeRoutingCIDR: "10.244.0.0/16",
+  autoDirectNodeRoutes: true,
+  routingMode: "native",
+  gatewayAPI: {
+    enabled: true,
+    enableAlpn: true,
+    enableAppProtocol: true,
+  },
+  hubble: {
+    enabled: true,
+    ui: {
+      enabled: true,
+    },
+    relay: {
+      enabled: true,
+    },
+  },
+  l2announcements: {
+    enabled: true,
+  },
+  operator: {
+    replicas: 1,
+    rollOutPods: true,
+  },
+  rollOutCiliumPods: true,
+  k8sClientRateLimit: {
+    qps: 100,
+    burst: 200,
+  },
+  k8sServiceHost: "localhost",
+  k8sServicePort: 7445,
+  cgroup: {
+    hostRoot: "/sys/fs/cgroup",
+    autoMount: {
+      enabled: false,
+    },
+  },
+  securityContext: {
+    capabilities: {
+      ciliumAgent: [
+        "CHOWN",
+        "KILL",
+        "NET_ADMIN",
+        "NET_RAW",
+        "IPC_LOCK",
+        "SYS_ADMIN",
+        "SYS_RESOURCE",
+        "DAC_OVERRIDE",
+        "FOWNER",
+        "SETGID",
+        "SETUID",
+      ],
+      cleanCiliumState: [
+        "NET_ADMIN",
+        "SYS_ADMIN",
+        "SYS_RESOURCE",
+      ],
+    },
+  },
+}

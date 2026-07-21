@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: valkey
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-10"
+spec:
+  destination:
+    namespace: valkey-system
+    server: https://kubernetes.default.svc
+
+  project: default
+
+  source:
+    repoURL: https://github.com/alexvegas22/k8s-home.git
+    path: operator/valkey
+    targetRevision: HEAD
+
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true

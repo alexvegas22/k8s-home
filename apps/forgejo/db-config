@@ -1,0 +1,5 @@
+DB_TYPE = postgres
+HOST = postgresql-forgejo-rw.forgejo.svc.cluster.local:5432
+NAME = forgejo
+USER = v34l
+PASSWD = "b11e85566234ec201ae03782"

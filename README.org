@@ -1,4 +1,4 @@
-#+TITLE: My home configuration for k3s
+#+TITLE: My home configuration for talos
 These are my config files for my home kubernetes setup
 
 * My apps
@@ -8,4 +8,5 @@ These are my config files for my home kubernetes setup
 * Services
 Here's a list of services I'm currently hosting :
  - Nexctcloud
+ - Immich
  - Vaultwarden

@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: valkey-operator-system
+
+helmCharts:
+  - name: valkey-operator
+    repo: https://valkey.io/valkey-helm
+    version: 0.4.0
+    releaseName: valkey-operator
+    namespace: valkey-operator-system
