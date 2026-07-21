@@ -13,7 +13,7 @@ spec:
   source:
     path: apps/forgejo
     repoURL: https://github.com/alexvegas22/k8s-home.git
-    targetRevision: HEAD
+    targetRevision: talos
 
   syncPolicy:
     automated:

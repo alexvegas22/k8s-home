@@ -11,7 +11,7 @@ spec:
   source:
     path: apps/immich
     repoURL: https://github.com/alexvegas22/k8s-home.git
-    targetRevision: HEAD
+    targetRevision: talos
   syncPolicy:
     automated:
       prune: true

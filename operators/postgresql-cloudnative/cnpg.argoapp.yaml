@@ -15,7 +15,7 @@ spec:
   source:
     repoURL: https://github.com/alexvegas22/k8s-home.git
     path: operator/postgresql-cloudnative
-    targetRevision: HEAD
+    targetRevision: talos
 
   syncPolicy:
     automated:
