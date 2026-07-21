@@ -17,3 +17,6 @@ spec:
         mode: Terminate
         certificateRefs:
           - name: v34l-com-tls
+      allowedRoutes:
+        namespaces:
+          from: All
