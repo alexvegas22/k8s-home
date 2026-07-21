@@ -9,7 +9,7 @@ spec:
   project: k8s-home
   source:
     repoURL: git@github.com/alexvegas22/k8s-home.git
-    targetRevision: HEAD
+    targetRevision: /refs/head/talos
     path: .
     directory:
       recurse: true
