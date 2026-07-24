@@ -5,4 +5,4 @@ metadata:
 resources:
   - deployment.yaml
   - network.yaml
-  - ingress.yaml
+  - httproute.yaml
