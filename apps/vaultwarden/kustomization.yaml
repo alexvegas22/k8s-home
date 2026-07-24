@@ -1,16 +1,12 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-namespace: vaultwarden
 resources:
-  - namespace.yaml
-  - helmrelease.yaml
-  - resources/httproute.yaml
-
-configMapGenerator:
-  - name: vaultwarden-values
-    files:
-      - values.yaml=helm/values.yaml
-
-configurations:
-  - kustomizeconfig.yaml
+  - resources/ingress.yaml
+helmCharts:
+  - name: vaultwarden
+    version: "0.43.1"
+    repo: https://guerzon.github.io/vaultwarden
+    releaseName: "vaultwarden"
+    namespace: vaultwarden
+    valuesFile: "helm/values.yaml"

@@ -64,13 +64,13 @@ gitea:
       ALLOW_FORK_WITHOUT_MAXIMUM_LIMIT: false
     cache:
       ADAPTER: redis
-      HOST: redis://forgejo-cache-valkey.forgejo.svc.cluster.local:6379/0
+      HOST: redis://forgejo-cache.forgejo.svc.cluster.local:6379/0
     session:
       PROVIDER: redis
-      PROVIDER_CONFIG: redis://forgejo-cache-valkey.forgejo.svc.cluster.local:6379/1
+      PROVIDER_CONFIG: redis://forgejo-cache.forgejo.svc.cluster.local:6379/1
     queue:
       TYPE: redis
-      CONN_STR: redis://forgejo-cache-valkey.forgejo.svc.cluster.local:6379/2
+      CONN_STR: redis://forgejo-cache.forgejo.svc.cluster.local:6379/2
     openid:
       ENABLE_OPENID_SIGNIN: false
       ENABLE_OPENID_SIGNUP: false

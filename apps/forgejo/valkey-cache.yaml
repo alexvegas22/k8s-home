@@ -1,0 +1,11 @@
+apiVersion: valkey.io/v1alpha1
+kind: ValkeyCluster
+metadata:
+  name: forgejo-cache
+  namespace: forgejo
+spec:
+  shards: 1
+  replicas: 0
+  workloadType: StatefulSet
+  persistence:
+    enabled: false
