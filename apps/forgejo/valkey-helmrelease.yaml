@@ -9,13 +9,14 @@ spec:
   releaseName: forgejo-cache
   chart:
     spec:
-      chart: valkey-operator
+      chart: valkey
       version: "0.9.3"
       sourceRef:
         kind: HelmRepository
         name: valkey
         namespace: flux-system
-  valuesFrom:
-    - kind: ConfigMap
-      name: forgejo-cache-valkey-values
-      valuesKey: values.yaml
+  values:
+    replicaCount: 3
+    service:
+      type: ClusterIP
+      port: 6379

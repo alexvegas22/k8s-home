@@ -12,9 +12,6 @@ configMapGenerator:
   - name: forgejo-values
     files:
       - values.yaml=base/forgejo.values.yaml
-  - name: forgejo-cache-valkey-values
-    files:
-      - values.yaml=base/valkey.values.yaml
 
 configurations:
   - kustomizeconfig.yaml
