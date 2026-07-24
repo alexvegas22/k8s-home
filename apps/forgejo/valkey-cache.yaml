@@ -7,6 +7,3 @@ spec:
   shards: 1
   replicas: 0
   workloadType: StatefulSet
-  persistence:
-    enabled: false
-    size: 1Gi
