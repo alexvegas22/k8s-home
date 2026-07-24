@@ -62,7 +62,7 @@ postgresql:
   primary:
     persistence:
       enabled: true
-      storageClass: "local-path"
+      storageClass: "nfs-client"
       accessMode: ReadWriteOnce
       size: 3Gi
 
@@ -74,7 +74,7 @@ redis:
     repository: bitnamilegacy/redis
   persistence:
     enabled: true
-    storageClass: "local-path"
+    storageClass: "nfs-client"
     accessMode: ReadWriteOnce
     size: 2Gi
 
@@ -88,12 +88,12 @@ persistence:
   mountPath: /var/www/html/data
   nextcloudConfig:
     enabled: true
-    storageClass: "local-path"
+    storageClass: "nfs-client"
     accessMode: ReadWriteOnce
     size: 2Gi
   nextcloudDatabase:
     enabled: true
-    storageClass: "local-path"
+    storageClass: "nfs-client"
     accessMode: ReadWriteOnce
     size: 5Gi
 
