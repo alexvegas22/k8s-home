@@ -20,5 +20,4 @@ spec:
 
       backendRefs:
         - name: vaultwarden
-          port:
-            number: 80
+          port: 80
