@@ -4,3 +4,5 @@ kind: Kustomization
 resources:
   - cnpg.yaml
   - valkey.yaml
+  - flux-operator.yaml
+  - flux-operator-mcp.yaml

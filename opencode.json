@@ -1,0 +1,10 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "flux": {
+      "type": "remote",
+      "url": "http://localhost:9090/mcp",
+      "enabled": true
+    }
+  }
+}
