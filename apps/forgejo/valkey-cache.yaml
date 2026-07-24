@@ -9,3 +9,4 @@ spec:
   workloadType: StatefulSet
   persistence:
     enabled: false
+    size: 1Gi
