@@ -5,7 +5,7 @@ namespace: cloud
 resources:
   - namespace.yaml
   - helmrelease.yaml
-  - resources/ingress.yaml
+  - resources/httproute.yaml
 
 configMapGenerator:
   - name: nextcloud-values

@@ -5,7 +5,7 @@ namespace: vault
 resources:
   - namespace.yaml
   - helmrelease.yaml
-  - resources/ingress.yaml
+  - resources/httproute.yaml
 
 configMapGenerator:
   - name: vault-values
