@@ -1,14 +1,16 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-metadata:
-  name: vault
-  namespace: vault
+
+namespace: vault
 resources:
+  - namespace.yaml
+  - helmrelease.yaml
   - resources/ingress.yaml
-helmCharts:
-  - name: vault
-    version: "0.29.1"
-    repo: "https://helm.releases.hashicorp.com"
-    releaseName: "vault"
-    namespace: vault
-    valuesFile: "helm/values.yaml"
+
+configMapGenerator:
+  - name: vault-values
+    files:
+      - values.yaml=helm/values.yaml
+
+configurations:
+  - kustomizeconfig.yaml

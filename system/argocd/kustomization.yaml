@@ -3,15 +3,15 @@ kind: Kustomization
 namespace: argocd
 
 resources:
+  - helmrelease.yaml
   - resources/httproute.yaml
   - resources/projects.yaml
   - resources/namespace.yaml
 
-helmCharts:
-  - name: argo-cd
-    repo: https://argoproj.github.io/argo-helm
-    version: 10.1.4
-    releaseName: argocd
-    apiVersions:
-      - monitoring.coreos.com/v1
-    valuesFile: helm/values.yaml
+configMapGenerator:
+  - name: argocd-values
+    files:
+      - values.yaml=helm/values.yaml
+
+configurations:
+  - kustomizeconfig.yaml
