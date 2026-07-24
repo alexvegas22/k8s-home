@@ -10,7 +10,7 @@ spec:
     namespace: cnpg-system
     server: https://kubernetes.default.svc
 
-  project: default
+  project: k8s-home
 
   source:
     repoURL: https://github.com/alexvegas22/k8s-home.git
