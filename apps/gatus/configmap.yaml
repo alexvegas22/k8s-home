@@ -11,32 +11,32 @@ data:
 
     endpoints:
       - name: blog-v34l
-        url: https://blog.v34l.com
+        url: https://blog.m15ty.com
         interval: 30s
         conditions:
           - "[STATUS] == 200"
       - name: nextcloud
-        url: https://nextcloud.v34l.com
+        url: https://nextcloud.m15ty.com
         interval: 30s
         conditions:
           - "[STATUS] == 200"
       - name: vaultwarden
-        url: https://vaultwarden.v34l.com
+        url: https://vaultwarden.m15ty.com
         interval: 30s
         conditions:
           - "[STATUS] == 200"
       - name: immich
-        url: https://immich.v34l.com
+        url: https://immich.m15ty.com
         interval: 30s
         conditions:
           - "[STATUS] == 200"
       - name: htb
-        url: https://htb.v34l.com
+        url: https://htb.m15ty.com
         interval: 30s
         conditions:
           - "[STATUS] == 200"
       - name: argocd
-        url: https://argocd.v34l.com
+        url: https://argocd.m15ty.com
         interval: 30s
         conditions:
           - "[STATUS] == 200"

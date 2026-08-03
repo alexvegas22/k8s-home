@@ -10,7 +10,7 @@ spec:
       sectionName: https
 
   hostnames:
-    - core.harbor.v34l.com
+    - core.harbor.m15ty.com
 
   rules:
     - matches:

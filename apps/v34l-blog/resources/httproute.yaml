@@ -9,7 +9,7 @@ spec:
       sectionName: https
 
   hostnames:
-    - v34l.com
+    - m15ty.com
 
   rules:
     - matches:

@@ -10,7 +10,7 @@ spec:
       sectionName: https
 
   hostnames:
-    - vaultwarden.v34l.com
+    - vaultwarden.m15ty.com
 
   rules:
     - matches:

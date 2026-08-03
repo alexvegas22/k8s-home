@@ -9,7 +9,7 @@ spec:
       namespace: gateway
 
   hostnames:
-    - argocd.v34l.com
+    - argocd.m15ty.com
 
   rules:
     - matches:

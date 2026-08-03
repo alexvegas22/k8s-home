@@ -10,7 +10,7 @@ ingress:
   enabled: false
 
 nextcloud:
-  host: nextcloud.v34l.com
+  host: nextcloud.m15ty.com
   existingSecret:
     enabled: true
     secretName: nextcloud-creds
@@ -24,15 +24,15 @@ nextcloud:
       $CONFIG = array (
         'trusted_proxies' => ['10.42.0.0/16'],
         'overwriteprotocol' => 'https',
-        'overwritehost' => 'nextcloud.v34l.com',
-        'overwrite.cli.url' => 'https://nextcloud.v34l.com',
+        'overwritehost' => 'nextcloud.m15ty.com',
+        'overwrite.cli.url' => 'https://nextcloud.m15ty.com',
         'forwarded_for_headers' => ['HTTP_X_FORWARDED_FOR'],
       );
   update: 0
   containerPort: 80
   datadir: /var/www/html/data
   trustedDomains:
-    - nextcloud.v34l.com
+    - nextcloud.m15ty.com
     - localhost
 
 phpClientHttpsFix:
@@ -136,7 +136,7 @@ collabora:
   collabora:
     ## HTTPS nextcloud domain, if needed
     aliasgroups:
-       - host: "https://nextcloud.v34l.com:443"
+       - host: "https://nextcloud.m15ty.com:443"
 
     # set extra parameters for collabora
     # you may need to add --o:ssl.termination=true
@@ -144,7 +144,7 @@ collabora:
 
     ## Specify server_name when the hostname is not reachable directly for
     # example behind reverse-proxy. example: collabora.domain
-    server_name: collabora.nextcloud.v34l.com
+    server_name: collabora.nextcloud.m15ty.com
 
     existingSecret:
       # set to true to to get collabora admin credentials from an existin secret

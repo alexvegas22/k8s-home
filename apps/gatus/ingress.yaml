@@ -10,7 +10,7 @@ spec:
       sectionName: https
 
   hostnames:
-    - gatus.v34l.com
+    - gatus.m15ty.com
 
   rules:
     - matches:

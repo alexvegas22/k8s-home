@@ -12,7 +12,7 @@ httpRoute:
     - name: main-gateway #name of the gateway resource
       namespace: gateway #name space where gateway resource running
   hostnames:
-    - git.v34l.com
+    - git.m15ty.com
   matches:
     path:
       type: PathPrefix
@@ -32,18 +32,18 @@ httpRoute:
 gitea:
   admin:
     existingSecret: forgejo-admin-secret
-    email: forgejo@v34l.com
+    email: forgejo@m15ty.com
   config:
     actions:
       enabled: true
       DEFAULT_ACTIONS_URL: https://github.com
     server:
-      ROOT_URL: https://git.v34l.com/
+      ROOT_URL: https://git.m15ty.com/
       PROTOCOL: http
       OFFLINE_MODE: false
-      DOMAIN: git.v34l.com
+      DOMAIN: git.m15ty.com
       LFS_START_SERVER: true
-      SSH_DOMAIN: ssh.git.v34l.com
+      SSH_DOMAIN: ssh.git.m15ty.com
     picture:
       ENABLE_FEDERATED_AVATAR: true
       DISABLE_GRAVATAR: false
@@ -81,7 +81,7 @@ gitea:
   #   - name: "authentik"
   #     provider: openidConnect
   #     existingSecret: forgejo-oauth-secret
-  #     autoDiscoverUrl: "https://auth.v34l.com/application/o/forgejo/.well-known/openid-configuration"
+  #     autoDiscoverUrl: "https://auth.m15ty.com/application/o/forgejo/.well-known/openid-configuration"
   #     scopes: "openid profile email offline_access"
   #     adminGroup: admin
   #     groupClaimName: groups

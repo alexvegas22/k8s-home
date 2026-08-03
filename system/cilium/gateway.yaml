@@ -12,7 +12,7 @@ spec:
     - name: https
       protocol: HTTPS
       port: 443
-      hostname: "*.v34l.com"
+      hostname: "*.m15ty.com"
       tls:
         mode: Terminate
         certificateRefs:

@@ -10,7 +10,7 @@ spec:
       sectionName: https
 
   hostnames:
-    - nextcloud.v34l.com
+    - nextcloud.m15ty.com
 
   rules:
     - matches:

@@ -6,7 +6,7 @@ metadata:
   namespace: htb
 spec:
   hostnames:
-    - htb.v34l.com
+    - htb.m15ty.com
   parentRefs:
     - name: main-gateway
       namespace: gateway

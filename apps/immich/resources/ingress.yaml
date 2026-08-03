@@ -10,7 +10,7 @@ spec:
       sectionName: https
 
   hostnames:
-    - immich.v34l.com
+    - immich.m15ty.com
 
   rules:
     - matches:

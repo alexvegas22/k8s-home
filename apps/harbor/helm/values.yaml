@@ -17,7 +17,7 @@ expose:
     # ClusterIP-specific labels
     labels: {}
 
-externalURL: https://core.harbor.v34l.com
+externalURL: https://core.harbor.m15ty.com
 
 persistence:
   enabled: true

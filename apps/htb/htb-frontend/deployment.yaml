@@ -20,6 +20,6 @@ spec:
         - containerPort: 80
         env:
         - name: VITE_API_URL
-          value: "https://api.htb.v34l.com"
+          value: "https://api.htb.m15ty.com"
         - name: VITE_WEBSOCKET_URL
-          value: "wss://ws.htb.v34l.com"
+          value: "wss://ws.htb.m15ty.com"

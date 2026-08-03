@@ -1,5 +1,5 @@
 global:
-  domain: argocd.v34l.com
+  domain: argocd.m15ty.com
 
 server:
   insecure: true
@@ -14,12 +14,12 @@ server:
 
   config:
     admin.enabled: true
-    url: https://argocd.v34l.com
+    url: https://argocd.m15ty.com
 
 configs:
   cm:
     create: true
-    url: https://argocd.v34l.com
+    url: https://argocd.m15ty.com
     kustomize.buildOptions: --enable-helm
   # secret:
   #   githubSecret:
