@@ -20,5 +20,4 @@ spec:
 
       backendRefs:
         - name: vault
-          port:
-            number: 8200
+          port: 8200
