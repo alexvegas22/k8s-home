@@ -5,7 +5,6 @@ metadata:
   namespace: kanidm
 resources:
   - configmap.yaml
-  - secret.yaml
   - service.yaml
   - deployment.yaml
   - httproute.yaml
