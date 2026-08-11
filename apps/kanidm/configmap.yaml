@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kanidm-config
+data:
+  server.toml: |
+    bindaddress = "0.0.0.0:8443"
+    db_path = "/db/kanidm.db"
+    tls_chain = "/ssl/chain.pem"
+    tls_key = "/ssl/key.pem"
+    domain = "auth.m15ty.com"
+    origin = "https://auth.m15ty.com"
+    log_level = "info"
+
+    [online_backup]
+    path = "/db/backups/"
+    schedule = "00 22 * * *"

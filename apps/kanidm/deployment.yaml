@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kanidm
+  annotations:
+    kube-score/ignore: pod-networkpolicy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kanidm
+  template:
+    metadata:
+      labels:
+        app: kanidm
+    spec:
+      containers:
+        - name: kanidm
+          image: kanidm/server:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: https
+              containerPort: 8443
+              protocol: TCP
+          volumeMounts:
+            - name: config
+              mountPath: /data
+            - name: data
+              mountPath: /db
+            - name: certs
+              mountPath: /ssl
+          resources:
+            requests:
+              cpu: 250m
+              memory: 512Mi
+            limits:
+              cpu: "2"
+              memory: 2Gi
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: [ALL]
+            seccompProfile:
+              type: RuntimeDefault
+      volumes:
+        - name: config
+          configMap:
+            name: kanidm-config
+        - name: data
+          persistentVolumeClaim:
+            claimName: kanidm-data
+        - name: certs
+          secret:
+            secretName: kanidm-certs
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: kanidm-data
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: nfs-client
