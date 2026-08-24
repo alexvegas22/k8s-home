@@ -1,0 +1,49 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: BackendTLSPolicy
+metadata:
+  name: kanidm-backend-tls
+  namespace: kanidm
+spec:
+  targetRefs:
+    - group: ""
+      kind: Service
+      name: kanidm
+      sectionName: https
+  validation:
+    hostname: kanidm.kanidm
+    caCertificateRefs:
+      - group: ""
+        kind: ConfigMap
+        name: kanidm-ca
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kanidm-ca
+  namespace: kanidm
+data:
+  ca.crt: |
+    -----BEGIN CERTIFICATE-----
+    MIIECTCCAnGgAwIBAgIUHoO3sN8exqHNvEEiK52l9wfDTSswDQYJKoZIhvcNAQEL
+    BQAwFDESMBAGA1UEAwwJa2FuaWRtLWNhMB4XDTI2MDgxMTAyMjY0NFoXDTM2MDgw
+    ODAyMjY0NFowFDESMBAGA1UEAwwJa2FuaWRtLWNhMIIBojANBgkqhkiG9w0BAQEF
+    AAOCAY8AMIIBigKCAYEAw0XoMGZF6nitLB7WfGQQAWZ7AnRtVCBd+RePTCSe4kCP
+    NpM+Ff5rJYMlgzJF6a8jgkfTbiqGD+jWX+aa870iQWsR3xK6M/H5Q+KZJHWlE5Tl
+    7E4oy7iOQEYSPjh5r2WMbsc1VuEKJQx4Lf6MvTNCbd2nQMcpR/4O5WchROW+dPjq
+    /JxfoJWmYrH/zgpAnbhDlT+UllnrqtLdF+nbgxF+hdfeMyzCxEIRHTC26+O+26LQ
+    gZZSFs5h+Uz08ujrfqvqm6MOYWiMKCpbpNLh/+RvmLBMbuXYx+s64Y/1RaRoLdoD
+    AJ6ndEU9N/GW5gLcQ/2AhXP6tlr+4pLejC6xCw2ualhrkbixBbb4NMJXDg+P8Dss
+    1olK/Wz/JnVtxd4cBhh9C2RqX75dCTZ1Wj6ry1/jUSuji8hkarg26FxVPYjTm2WJ
+    exao/xBL1DP5eSx6t9JjYjO9qTrWiCYLqaP/qT0weupj4L9/OH7qrVC8BCCAap+u
+    F8/wcz783YPiD5KDHbsFAgMBAAGjUzBRMB0GA1UdDgQWBBQo3S8ApFU71SYpLkqQ
+    A3H13JYCSzAfBgNVHSMEGDAWgBQo3S8ApFU71SYpLkqQA3H13JYCSzAPBgNVHRMB
+    Af8EBTADAQH/MA0GCSqGSIb3DQEBCwUAA4IBgQAcDom9FH1XjjyeWQVXnzS6Enbo
+    eZj1HVN1xI9ixDtcD+LqtMU0zWEA+ecPQiDutNXL3HmAOCwbmnpgXyi0inD3zVrQ
+    n8YO7tn1NW2CSnmRkLjS/1iZ3iSKotC6eAkCihoDpdR7/IvtSWQF5O77QFvnfmDi
+    HdcYBfYgQG6Nb4SBk2pOiMP5eRhIFWTK+cw8RTd4RSlwkG3A1o9P6r8P6ac4yDg3
+    K/TJGIDDov1l2C+0iPSv/ocFG7zzro5w57b6ovC9EdytU4dmEQw4Hsp4FDd5w1G1
+    Lo9gCQ7yASIkACFuG4AAjlYUTsvNvPYp9++JgkkmXAn5W3eqpgR0LQiFh4M+Qxvl
+    7GrHJAf6HECsXgXhgiLa0h1eXq3EHzdkyh4XfkqmcnYEfAxqsPQHtWLDv12kx7KD
+    7LQRZhLSchDOzBV/44Z6y3gCiAxrd9xYvxYFan714vzcwP8p/14nba/ZI5u6l3pe
+    075VxbPl59Ypzu3hS98pYs76KXstsXkxhnxw//w=
+    -----END CERTIFICATE-----

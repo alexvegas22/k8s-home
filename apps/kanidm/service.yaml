@@ -4,7 +4,8 @@ metadata:
   name: kanidm
 spec:
   ports:
-    - protocol: TCP
+    - name: https
+      protocol: TCP
       port: 8443
       targetPort: 8443
   selector:
