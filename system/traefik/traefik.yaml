@@ -8,11 +8,8 @@ spec:
     additionalArguments:
       - "--api"
       - "--api.dashboard=true"
-      - "--api.insecure=true"
-    ports:
-      traefik:
-        expose:
-          enabled: true
+      - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
     providers:
       kubernetesCRD:
         allowCrossNamespace: true
