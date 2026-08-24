@@ -46,7 +46,7 @@ spec:
           service:
             name: collabora
             port:
-              number: 80
+              number: 9980
   tls:
     - hosts:
       - collabora.nextcloud.v34l.com
