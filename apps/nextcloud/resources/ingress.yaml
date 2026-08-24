@@ -44,7 +44,7 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: collabora
+            name: nextcloud-collabora
             port:
               number: 9980
   tls:
