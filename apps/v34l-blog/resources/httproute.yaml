@@ -10,6 +10,7 @@ spec:
 
   hostnames:
     - m15ty.com
+    - blog.m15ty.com
 
   rules:
     - matches:
