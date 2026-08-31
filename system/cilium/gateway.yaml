@@ -20,12 +20,3 @@ spec:
       allowedRoutes:
         namespaces:
           from: All
-    - name: argocd-passthrough
-      protocol: TLS
-      port: 443
-      hostname: argocd.m15ty.com
-      tls:
-        mode: Passthrough
-      allowedRoutes:
-        namespaces:
-          from: All
