@@ -2,15 +2,18 @@ global:
   domain: argocd.m15ty.com
 
 server:
-  insecure: true
   ingress:
     enabled: false
 
-  extraArgs:
-    - --insecure
-
   service:
     type: ClusterIP
+
+  certificate:
+    enabled: true
+    issuer:
+      group: cert-manager.io
+      kind: ClusterIssuer
+      name: letsencrypt-prod
 
   config:
     admin.enabled: true
