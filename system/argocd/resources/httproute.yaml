@@ -17,6 +17,13 @@ spec:
             type: PathPrefix
             value: /
 
+      filters:
+        - type: RequestHeaderModifier
+          requestHeaderModifier:
+            set:
+              - name: X-Forwarded-Proto
+                value: https
+
       backendRefs:
         - name: argocd-server
           port: 80
