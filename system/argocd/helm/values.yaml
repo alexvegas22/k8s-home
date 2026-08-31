@@ -1,5 +1,7 @@
 global:
   domain: argocd.m15ty.com
+  networkPolicy:
+    create: false
 
 server:
   ingress:

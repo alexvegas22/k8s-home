@@ -18,6 +18,9 @@ spec:
         - name: kanidm
           image: kanidm/server:latest
           imagePullPolicy: IfNotPresent
+          env:
+            - name: KANIDM_ADMIN_BIND_PATH
+              value: "/var/run/kanidmd.sock"
           ports:
             - name: https
               containerPort: 8443
@@ -29,6 +32,8 @@ spec:
               mountPath: /db
             - name: certs
               mountPath: /ssl
+            - name: socket
+              mountPath: /var/run
           resources:
             requests:
               cpu: 250m
@@ -54,6 +59,8 @@ spec:
         - name: certs
           secret:
             secretName: kanidm-certs
+        - name: socket
+          emptyDir: {}
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
