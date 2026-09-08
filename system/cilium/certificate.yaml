@@ -1,10 +1,10 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: v34l-com
+  name: m15ty-com
   namespace: gateway
 spec:
-  secretName: v34l-com-tls
+  secretName: m15ty-com-tls
   issuerRef:
     name: letsencrypt-prod
     kind: ClusterIssuer

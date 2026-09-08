@@ -16,7 +16,7 @@ spec:
       tls:
         mode: Terminate
         certificateRefs:
-          - name: v34l-com-tls
+          - name: m15ty-com-tls
       allowedRoutes:
         namespaces:
           from: All
