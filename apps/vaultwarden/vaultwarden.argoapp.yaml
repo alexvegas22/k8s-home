@@ -15,6 +15,6 @@ spec:
   syncPolicy:
     automated:
       prune: true
-      selfHeal: false # TEMP: disabled for DB migration; re-enable after
+      selfHeal: true
     syncOptions:
       - CreateNamespace=true
