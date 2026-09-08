@@ -7,3 +7,4 @@ resources:
   - certificate.yaml
   - configmap.yaml
   - kanidm.yaml
+  - person.yaml

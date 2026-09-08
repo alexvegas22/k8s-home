@@ -1,0 +1,67 @@
+---
+{
+  apiVersion: "kaniop.rs/v1beta1",
+  kind: "KanidmPersonAccount",
+  metadata: {
+    name: "v34l",
+  },
+  spec: {
+    kanidmRef: {
+      name: "kanidm",
+    },
+    personAttributes: {
+      displayname: "v34l",
+      mail: [
+        "admin@v34l.com",
+      ],
+    },
+  },
+}
+---
+{
+  apiVersion: "kaniop.rs/v1beta1",
+  kind: "KanidmGroup",
+  metadata: {
+    name: "cluster-admins",
+  },
+  spec: {
+    kanidmRef: {
+      name: "kanidm",
+    },
+    members: [
+      "v34l",
+    ],
+  },
+}
+---
+{
+  apiVersion: "kaniop.rs/v1beta1",
+  kind: "KanidmGroup",
+  metadata: {
+    name: "nextcloud-users",
+  },
+  spec: {
+    kanidmRef: {
+      name: "kanidm",
+    },
+    members: [
+
+    ],
+  },
+}
+---
+{
+  apiVersion: "kaniop.rs/v1beta1",
+  kind: "KanidmGroup",
+  metadata: {
+    name: "immich-users",
+  },
+  spec: {
+    kanidmRef: {
+      name: "kanidm",
+    },
+    members: [
+
+    ],
+  },
+}
