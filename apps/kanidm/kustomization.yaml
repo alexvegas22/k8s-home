@@ -4,8 +4,5 @@ metadata:
   name: kanidm-app
   namespace: kanidm
 resources:
-  - configmap.yaml
-  - service.yaml
-  - deployment.yaml
-  - httproute.yaml
-  - backendtlspolicy.yaml
+  - certificate.yaml
+  - kanidm.yaml

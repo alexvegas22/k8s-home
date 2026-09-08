@@ -1,0 +1,51 @@
+apiVersion: kaniop.rs/v1beta1
+kind: Kanidm
+metadata:
+  name: kanidm
+  namespace: kanidm
+spec:
+  domain: auth.m15ty.com
+  origin: https://auth.m15ty.com
+  tlsSecretName: kanidm-tls
+  portName: https
+  logLevel: info
+
+  replicaGroups:
+    - name: default
+      replicas: 1
+      primaryNode: true
+      resources:
+        requests:
+          cpu: 250m
+          memory: 512Mi
+        limits:
+          cpu: "2"
+          memory: 2Gi
+
+  storage:
+    volumeClaimTemplate:
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        storageClassName: nfs-client
+        resources:
+          requests:
+            storage: 10Gi
+
+  service:
+    type: ClusterIP
+
+  gateway:
+    parentRefs:
+      - group: gateway.networking.k8s.io
+        kind: Gateway
+        name: main-gateway
+        namespace: gateway
+        sectionName: https
+        port: 443
+    hostnames:
+      - auth.m15ty.com
+    backendTlsPolicy:
+      validation:
+        hostname: auth.m15ty.com
+        wellKnownCaCertificates: System
