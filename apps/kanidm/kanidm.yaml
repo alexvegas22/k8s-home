@@ -48,4 +48,7 @@ spec:
     backendTlsPolicy:
       validation:
         hostname: auth.m15ty.com
-        wellKnownCaCertificates: System
+        caCertificateRefs:
+          - group: ""
+            kind: ConfigMap
+            name: kanidm-ca-bundle
