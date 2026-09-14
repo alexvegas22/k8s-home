@@ -7,7 +7,7 @@ spec:
   parentRefs:
     - name: main-gateway
       namespace: gateway
-      sectionName: argocd-passthrough
+      sectionName: https
 
   hostnames:
     - argocd.m15ty.com
