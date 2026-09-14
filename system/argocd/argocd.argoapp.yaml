@@ -9,7 +9,7 @@ spec:
   project: k8s-home
   source:
     repoURL: https://github.com/alexvegas22/k8s-home
-    targetRevision: main
+    targetRevision: talos
     path: system/argocd
   destination:
     server: https://kubernetes.default.svc
