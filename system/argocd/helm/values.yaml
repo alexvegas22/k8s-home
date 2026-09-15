@@ -22,6 +22,8 @@ server:
     url: https://argocd.m15ty.com
 
 configs:
+  params:
+    server.insecure: "true"
   cm:
     create: true
     url: https://argocd.m15ty.com
