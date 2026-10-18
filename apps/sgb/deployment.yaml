@@ -32,7 +32,7 @@ spec:
               git clone --quiet https://github.com/profcfuhrmanets/log210-systeme-gestion-bordereaux.git /src
               cd /src
               git checkout --quiet "$SGB_REF"
-              npm ci --no-audit --no-fund
+              npm ci --no-audit --no-fund --ignore-scripts
               npm run compile
               npm run copydata
               cp -R /src/. /work/
