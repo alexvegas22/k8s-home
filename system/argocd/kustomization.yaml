@@ -6,6 +6,7 @@ resources:
   - resources/httproute.yaml
   - resources/projects.yaml
   - resources/namespace.yaml
+  - kanidm-oidc-client.yaml
 
 helmCharts:
   - name: argo-cd

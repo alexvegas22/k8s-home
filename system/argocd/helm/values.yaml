@@ -28,6 +28,17 @@ configs:
     create: true
     url: https://argocd.m15ty.com
     kustomize.buildOptions: --enable-helm
+    "oidc.config": |
+      name: kanidm
+      issuer: https://auth.m15ty.com/oauth2/openid/argocd
+      clientID: argocd
+      clientSecret: $argocd-kanidm-oauth2-credentials:CLIENT_SECRET
+      requestedScopes: ["openid", "profile", "email", "groups_name"]
+  rbac:
+    policy.default: role:readonly
+    policy.csv: |
+      g, cluster-admins, role:admin
+      g, idm_all_persons, role:readonly
   # secret:
   #   githubSecret:
   #     secretKeyRef:
