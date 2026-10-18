@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: sgb
+  namespace: argocd
+spec:
+  destination:
+    namespace: sgb
+    server: https://kubernetes.default.svc
+  project: k8s-home
+  source:
+    path: apps/sgb
+    repoURL: https://github.com/alexvegas22/k8s-home.git
+    targetRevision: talos
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

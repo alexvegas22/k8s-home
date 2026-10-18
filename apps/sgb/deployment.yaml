@@ -1,0 +1,102 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sgb
+  namespace: sgb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sgb
+  template:
+    metadata:
+      labels:
+        app: sgb
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        seccompProfile:
+          type: RuntimeDefault
+      # Builds the upstream SGB source at a pinned commit into /work (emptyDir).
+      initContainers:
+        - name: build
+          image: node:20-alpine
+          command: ["sh", "-c"]
+          args:
+            - |
+              set -eu
+              apk add --no-cache git >/dev/null
+              git clone --quiet https://github.com/profcfuhrmanets/log210-systeme-gestion-bordereaux.git /src
+              cd /src
+              git checkout --quiet "$SGB_REF"
+              npm ci --no-audit --no-fund
+              npm run compile
+              npm run copydata
+              cp -R /src/. /work/
+          env:
+            - name: SGB_REF
+              value: "521d1b5ee3f8a0a4438ef9ed0cb052b2e69a6037"
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: ["ALL"]
+          volumeMounts:
+            - name: work
+              mountPath: /work
+            - name: npm-cache
+              mountPath: /home/node/.npm
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: "1"
+              memory: 1Gi
+      containers:
+        - name: sgb
+          image: node:20-alpine
+          workingDir: /work
+          command: ["node", "dist/index.js"]
+          env:
+            - name: PORT
+              value: "3200"
+            - name: NODE_ENV
+              value: production
+          ports:
+            - name: http
+              containerPort: 3200
+          readinessProbe:
+            httpGet:
+              path: /api/v3/health/ping
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /api/v3/health/ping
+              port: http
+            initialDelaySeconds: 20
+            periodSeconds: 30
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
+          volumeMounts:
+            - name: work
+              mountPath: /work
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+      volumes:
+        - name: work
+          emptyDir: {}
+        - name: npm-cache
+          emptyDir: {}
