@@ -3,9 +3,12 @@ kind: Kustomization
 
 namespace: forgejo-runner
 
+# Vendored upstream chart (see README.md); resolved as chart/forgejo-runner.
+helmGlobals:
+  chartHome: chart
+
 helmCharts:
   - name: forgejo-runner
-    repo: oci://code.forgejo.org/forgejo-helm/forgejo/forgejo-runner
     version: "0.7.5"
     releaseName: forgejo-runner
     valuesFile: helm/values.yaml
