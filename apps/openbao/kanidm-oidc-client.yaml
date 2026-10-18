@@ -1,0 +1,43 @@
+apiVersion: kaniop.rs/v1beta1
+kind: KanidmOAuth2Client
+metadata:
+  name: openbao
+  namespace: openbao
+spec:
+  kanidmRef:
+    name: kanidm
+    namespace: kanidm
+
+  displayname: OpenBao
+  origin: https://openbao.m15ty.com
+  redirectUrl:
+    - https://openbao.m15ty.com/ui/vault/auth/oidc/oidc/callback
+    - http://localhost:8250/oidc/callback
+
+  disableConsentPrompt: true
+
+  # kanidm enforces PKCE by default; kept consistent with the other clients here.
+  allowInsecureClientDisablePkce: true
+
+  # Credentials are consumed by the bao CLI setup, not mounted into the pod.
+  secretTemplate:
+    labels:
+      app.kubernetes.io/part-of: openbao
+
+  scopeMap:
+    - group: idm_all_persons
+      scopes:
+        - openid
+        - profile
+        - email
+        - groups_name
+  claimMap:
+    - name: roles
+      valuesMap:
+        - group: idm_all_persons
+          values:
+            - user
+        - group: cluster-admins
+          values:
+            - admin
+      joinStrategy: array
