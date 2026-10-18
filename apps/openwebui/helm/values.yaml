@@ -43,6 +43,12 @@ persistence:
   size: 10Gi
   storageClass: nfs-client
 
+startupProbe:
+  httpGet:
+    path: /health
+    port: http
+  periodSeconds: 15
+  failureThreshold: 40
 livenessProbe:
   httpGet:
     path: /health

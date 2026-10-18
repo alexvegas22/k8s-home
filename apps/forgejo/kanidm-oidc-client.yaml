@@ -13,6 +13,11 @@ spec:
     - https://git.m15ty.com/user/oauth2/forgejo/callback
   disableConsentPrompt: true
   allowInsecureClientDisablePkce: true
+  secretKeyAliases:
+    clientId:
+      - key
+    clientSecret:
+      - secret
   scopeMap:
     - group: idm_all_persons
       scopes:
