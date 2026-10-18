@@ -36,10 +36,16 @@ spec:
               npm run compile
               npm run copydata
               cp -R /src/. /work/
+              chown -R 1000:1000 /work
           env:
             - name: SGB_REF
               value: "521d1b5ee3f8a0a4438ef9ed0cb052b2e69a6037"
+          # Root only for the build step (apk add git); the long-running
+          # container below stays non-root with a read-only root filesystem.
           securityContext:
+            runAsNonRoot: false
+            runAsUser: 0
+            runAsGroup: 0
             allowPrivilegeEscalation: false
             capabilities:
               drop: ["ALL"]
@@ -47,7 +53,7 @@ spec:
             - name: work
               mountPath: /work
             - name: npm-cache
-              mountPath: /home/node/.npm
+              mountPath: /root/.npm
           resources:
             requests:
               cpu: 100m
