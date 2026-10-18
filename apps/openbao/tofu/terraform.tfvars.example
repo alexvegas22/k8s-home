@@ -1,0 +1,4 @@
+# Copy to terraform.tfvars (gitignored). Do NOT put secrets here: prefer
+#   export TF_VAR_oidc_client_secret=...   (from openbao/openbao-kanidm-oauth2-credentials)
+#   export BAO_TOKEN=...                   (admin token; from openbao/openbao-init-keys)
+openbao_address = "https://openbao.m15ty.com"
