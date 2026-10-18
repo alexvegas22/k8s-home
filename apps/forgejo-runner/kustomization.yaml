@@ -3,6 +3,9 @@ kind: Kustomization
 
 namespace: forgejo-runner
 
+resources:
+  - namespace.yaml
+
 # Vendored upstream chart (see README.md); resolved as chart/forgejo-runner.
 helmGlobals:
   chartHome: chart
