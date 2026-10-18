@@ -62,7 +62,7 @@ postgresql:
   primary:
     persistence:
       enabled: true
-      storageClass: "nfs-client"
+      storageClass: "local-path"
       accessMode: ReadWriteOnce
       size: 3Gi
 
