@@ -11,7 +11,7 @@ spec:
   displayname: ArgoCD
   origin: https://argocd.m15ty.com
   redirectUrl:
-    - https://argocd.m15ty.com/api/dex/callback
+    - https://argocd.m15ty.com/auth/callback
 
   disableConsentPrompt: true
 
