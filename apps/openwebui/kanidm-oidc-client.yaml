@@ -25,9 +25,6 @@ spec:
         - openid
         - profile
         - email
-  supScopeMap:
-    - group: idm_all_persons
-      scopes:
         - groups
   claimMap:
     - name: roles

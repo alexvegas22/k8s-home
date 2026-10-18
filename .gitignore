@@ -5,3 +5,4 @@ keys
 /system/secrets/
 /apps/argocd/charts/
 charts/
+talos/
