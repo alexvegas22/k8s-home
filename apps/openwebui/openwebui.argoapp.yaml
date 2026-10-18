@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: openwebui
+  namespace: argocd
+spec:
+  destination:
+    namespace: openwebui
+    server: https://kubernetes.default.svc
+  project: k8s-home
+  source:
+    path: apps/openwebui
+    repoURL: https://github.com/alexvegas22/k8s-home.git
+    targetRevision: talos
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

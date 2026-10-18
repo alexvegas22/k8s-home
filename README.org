@@ -10,3 +10,4 @@ Here's a list of services I'm currently hosting :
  - Nexctcloud
  - Immich
  - Vaultwarden
+ - Open WebUI (chat.m15ty.com)

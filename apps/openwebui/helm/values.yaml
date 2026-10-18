@@ -1,0 +1,65 @@
+ollama:
+  enabled: true
+  persistentVolume:
+    enabled: true
+    size: 20Gi
+    storageClass: local-path
+  resources:
+    requests:
+      cpu: 250m
+      memory: 1Gi
+
+pipelines:
+  enabled: true
+
+tika:
+  enabled: false
+
+sso:
+  enabled: true
+  enableSignup: true
+  oidc:
+    enabled: true
+    clientId: open-webui
+    clientExistingSecret: open-webui-kanidm-oauth2-credentials
+    clientExistingSecretKey: CLIENT_SECRET
+    providerUrl: https://auth.m15ty.com/oauth2/openid/open-webui/.well-known/openid-configuration
+    providerName: kanidm
+    scopes: "openid email profile groups"
+  enableRoleManagement: true
+  roleManagement:
+    rolesClaim: roles
+    allowedRoles: "user,admin"
+    adminRoles: "admin"
+
+commonEnvVars:
+  - name: ENABLE_SIGNUP
+    value: "false"
+  - name: WEBUI_URL
+    value: "https://chat.m15ty.com"
+
+persistence:
+  enabled: true
+  size: 10Gi
+  storageClass: nfs-client
+
+livenessProbe:
+  httpGet:
+    path: /health
+    port: http
+  initialDelaySeconds: 60
+  periodSeconds: 30
+  failureThreshold: 3
+readinessProbe:
+  httpGet:
+    path: /health/db
+    port: http
+  periodSeconds: 30
+
+resources:
+  requests:
+    cpu: 250m
+    memory: 512Mi
+  limits:
+    cpu: "2"
+    memory: 4Gi
