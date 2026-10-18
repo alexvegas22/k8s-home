@@ -15,6 +15,10 @@ spec:
 
   disableConsentPrompt: true
 
+  # Open WebUI does not send a PKCE code_challenge, and kanidm enforces
+  # PKCE by default (kanidm 1.5+). Required until upstream supports PKCE.
+  allowInsecureClientDisablePkce: true
+
   scopeMap:
     - group: idm_all_persons
       scopes:
