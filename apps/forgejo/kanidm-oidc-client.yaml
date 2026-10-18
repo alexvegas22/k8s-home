@@ -10,7 +10,7 @@ spec:
   displayname: Forgejo
   origin: https://git.m15ty.com
   redirectUrl:
-    - https://git.m15ty.com/user/oauth2/forgejo/callback
+    - https://git.m15ty.com/user/oauth2/kanidm/callback
   disableConsentPrompt: true
   allowInsecureClientDisablePkce: true
   secretKeyAliases:
