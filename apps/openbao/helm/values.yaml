@@ -1,0 +1,43 @@
+global:
+  enabled: true
+  tlsDisable: true
+
+server:
+  image:
+    registry: "quay.io"
+    repository: "openbao/openbao"
+    tag: "2.7.1"
+    pullPolicy: IfNotPresent
+
+  dataStorage:
+    enabled: true
+    size: 10Gi
+    storageClass: nfs-client
+    accessMode: ReadWriteOnce
+
+  standalone:
+    enabled: true
+    config: |-
+      ui = true
+
+      listener "tcp" {
+        tls_disable = 1
+        address = "[::]:8200"
+        cluster_address = "[::]:8201"
+      }
+
+      storage "file" {
+        path = "/openbao/data"
+      }
+
+ui:
+  enabled: true
+  serviceType: "ClusterIP"
+  targetPort: 8200
+  externalPort: 8200
+
+injector:
+  enabled: false
+
+csi:
+  enabled: false

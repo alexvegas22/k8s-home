@@ -1,15 +1,15 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: vault
+  name: openbao
   namespace: argocd
 spec:
   destination:
-    namespace: vault
+    namespace: openbao
     server: https://kubernetes.default.svc
   project: k8s-home
   source:
-    path: apps/vault
+    path: apps/openbao
     repoURL: https://github.com/alexvegas22/k8s-home.git
     targetRevision: talos
   syncPolicy:
