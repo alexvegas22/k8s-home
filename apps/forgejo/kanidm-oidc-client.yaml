@@ -13,6 +13,7 @@ spec:
     - https://git.m15ty.com/user/oauth2/kanidm/callback
   disableConsentPrompt: true
   allowInsecureClientDisablePkce: true
+  preferShortUsername: true
   secretKeyAliases:
     clientId:
       - key

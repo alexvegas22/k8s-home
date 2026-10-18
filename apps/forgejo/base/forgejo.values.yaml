@@ -54,7 +54,7 @@ gitea:
       REGISTER_EMAIL_CONFIRM: false
       OPENID_CONNECT_SCOPES: "openid profile email groups_name"
       ENABLE_AUTO_REGISTRATION: true
-      USERNAME: name
+      USERNAME: preferred_username
       UPDATE_AVATAR: false
       ACCOUNT_LINKING: auto
     repository:
