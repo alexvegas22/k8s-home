@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - cnpg.cluster.yaml
   - valkey-cache.yaml
+  - kanidm-oidc-client.yaml
 
 helmCharts:
   - name: forgejo

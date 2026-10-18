@@ -52,7 +52,7 @@ gitea:
       DEFAULT_ALLOW_CREATE_ORGANIZATION: false
     oauth2_client:
       REGISTER_EMAIL_CONFIRM: false
-      OPENID_CONNECT_SCOPES: "openid profile email offline_access"
+      OPENID_CONNECT_SCOPES: "openid profile email groups_name"
       ENABLE_AUTO_REGISTRATION: true
       USERNAME: nickname
       UPDATE_AVATAR: false
@@ -77,16 +77,13 @@ gitea:
     lfs:
       STORAGE_TYPE: local
       PATH: /data/forgejo/lfs
-  # oauth:
-  #   - name: "authentik"
-  #     provider: openidConnect
-  #     existingSecret: forgejo-oauth-secret
-  #     autoDiscoverUrl: "https://auth.m15ty.com/application/o/forgejo/.well-known/openid-configuration"
-  #     scopes: "openid profile email offline_access"
-  #     adminGroup: admin
-  #     groupClaimName: groups
-  #     groupTeamMap: '{"club-lanets": {"Lan_ETS": ["Members"]},"exec-lanets": {"Lan_ETS": ["Owners"]},"exec-cedille": {"cedille": ["Owners"]},"exec-conjure": {"conjure": ["Owners"]}}'
-  #     groupTeamMapRemoval: "true"
+  oauth:
+    - name: "kanidm"
+      provider: openidConnect
+      existingSecret: forgejo-kanidm-oauth2-credentials
+      autoDiscoverUrl: "https://auth.m15ty.com/oauth2/openid/forgejo/.well-known/openid-configuration"
+      scopes: "openid profile email groups_name"
+      groupClaimName: groups_name
   additionalConfigSources:
     - secret:
         secretName: forgejo-db-config
