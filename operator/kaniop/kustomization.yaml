@@ -1,0 +1,17 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# CRDs are only published inside the OCI chart (not in the upstream git repo),
+# so they are vendored from oci://ghcr.io/pando85/helm-charts/kaniop:0.19.0
+# (charts/kaniop/crds/crds.yaml) and must be kept in sync with the chart version.
+resources:
+  - crds/crds.yaml
+
+namespace: kaniop
+
+helmCharts:
+  - name: kaniop
+    repo: oci://ghcr.io/pando85/helm-charts
+    version: 0.19.0
+    releaseName: kaniop
+    namespace: kaniop

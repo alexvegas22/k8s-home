@@ -35,6 +35,11 @@ spec:
   service:
     type: ClusterIP
 
+  personNamespaceSelector: {}
+  groupNamespaceSelector: {}
+  oauth2ClientNamespaceSelector: {}
+  serviceAccountNamespaceSelector: {}
+
   gateway:
     parentRefs:
       - group: gateway.networking.k8s.io
