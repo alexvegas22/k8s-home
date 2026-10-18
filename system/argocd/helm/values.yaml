@@ -28,6 +28,8 @@ configs:
     create: true
     url: https://argocd.m15ty.com
     kustomize.buildOptions: --enable-helm
+    # MCP service account: API token only, no interactive login.
+    accounts.argo-mcp: apiKey
     "oidc.config": |
       name: kanidm
       issuer: https://auth.m15ty.com/oauth2/openid/argocd
@@ -39,6 +41,11 @@ configs:
     policy.csv: |
       g, cluster-admins, role:admin
       g, idm_all_persons, role:readonly
+      # argo-mcp: read, sync and run actions on applications; no create/update/delete.
+      p, role:argo-mcp, applications, get, */*, allow
+      p, role:argo-mcp, applications, sync, */*, allow
+      p, role:argo-mcp, applications, action/*, */*, allow
+      g, argo-mcp, role:argo-mcp
   # secret:
   #   githubSecret:
   #     secretKeyRef:
