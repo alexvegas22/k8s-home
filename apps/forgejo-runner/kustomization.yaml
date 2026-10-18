@@ -1,0 +1,12 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: forgejo-runner
+
+helmCharts:
+  - name: forgejo-runner
+    repo: oci://code.forgejo.org/forgejo-helm/forgejo/forgejo-runner
+    version: "0.7.5"
+    releaseName: forgejo-runner
+    valuesFile: helm/values.yaml
+    namespace: forgejo-runner

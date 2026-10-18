@@ -1,0 +1,111 @@
+# Forgejo Actions runner for the instance in apps/forgejo.
+#
+# The chart is vendored in ../chart/forgejo-runner (0.7.5, appVersion 12.7.3)
+# because upstream is not published to an OCI registry and carries no
+# index.yaml, so it can be pulled neither by kustomize nor by ArgoCD.
+#
+# Registration is intentionally NOT done by the chart. The chart's own
+# registration path (runner.config.create) runs a `helm.sh/hook: pre-install`
+# Job that `kubectl patch`es a Secret -- ArgoCD ignores helm hooks and its
+# selfHeal would revert that patch forever. With create:false the chart
+# renders no hooks at all and only references a pre-registered secret, which
+# keeps the whole app declarative.
+#
+# One-time setup: see ../README.md
+
+replicaCount: 1
+
+image:
+  registry: code.forgejo.org
+  repository: forgejo/runner
+  # Empty tag => falls back to the chart's appVersion (12.7.3).
+  tag: ""
+
+runner:
+  config:
+    # Do not let the chart create/register the runner. See header.
+    create: false
+    # Secret holding the `.runner` key created by a one-time manual
+    # `forgejo-runner register`. Created out-of-band, never committed.
+    existingSecret: forgejo-runner-registered
+    existingInitSecret: ""
+
+    instance: https://git.m15ty.com
+    # `name` and `token` are unused while create:false and existingSecret is set.
+    name: ""
+    token: ""
+
+    file:
+      log:
+        level: info
+        job_level: info
+      runner:
+        file: ".runner"
+        # Concurrent jobs per runner pod. Raise alongside replicaCount.
+        capacity: 1
+        # Upstream defaults ship two placeholder A_TEST_ENV_NAME_* variables
+        # into every job. An empty map does NOT clear them (Helm merge keeps
+        # the chart defaults), so each key must be nulled out explicitly --
+        # same idiom as the chart's own values-dind-bypass.yaml.
+        envs:
+          A_TEST_ENV_NAME_1: null
+          A_TEST_ENV_NAME_2: null
+        env_file: ""
+        timeout: 3h
+        insecure: false
+        fetch_timeout: 5s
+        fetch_interval: 2s
+        # Labels are baked into `.runner` at registration time, so this stays
+        # empty. See the `--labels` hint in ../README.md.
+        labels: []
+      cache:
+        enabled: true
+        dir: ""
+        host: ""
+        port: 0
+        external_server: ""
+      container:
+        # Empty => the in-pod dind sidecar manages its own bridge network.
+        network: ""
+        enable_ipv6: false
+        # Job containers stay unprivileged. Only the pod's own securityContext
+        # (below) is privileged, which the hardcoded dind sidecar requires.
+        privileged: false
+        options: ""
+        workdir_parent: ""
+        valid_volumes: []
+        docker_host: "-"
+        force_pull: false
+      host:
+        workdir_parent: ""
+
+# The chart hardcodes a `dind` sidecar in templates/deployment.yaml with no
+# values toggle, so privileged: true is required for docker-in-docker to work.
+securityContext:
+  privileged: true
+
+serviceAccount:
+  create: true
+  automount: true
+
+podAnnotations: {}
+podLabels: {}
+podSecurityContext: {}
+
+autoscaling:
+  enabled: false
+
+volumes: []
+volumeMounts: []
+extraEnvVars: []
+imagePullSecrets: []
+dnsConfig: {}
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
+priorityClassName: ""
+
+resources: {}
+dind:
+  resources: {}
