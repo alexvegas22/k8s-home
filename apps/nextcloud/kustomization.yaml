@@ -4,7 +4,6 @@ kind: Kustomization
 resources:
   - resources/ingress.yaml
   - postgres.yaml
-  - valkey.yaml
 helmCharts:
   - name: nextcloud
     version: "9.1.0"
