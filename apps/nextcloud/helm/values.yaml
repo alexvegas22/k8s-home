@@ -61,16 +61,16 @@ externalDatabase:
     passwordKey: password
 
 redis:
+  enabled: false
+
+externalRedis:
   enabled: true
-  architecture: standalone
-  image:
-    registry: docker.io
-    repository: bitnamilegacy/redis
-  persistence:
+  host: valkey-nextcloud-valkey.cloud.svc
+  port: "6379"
+  existingSecret:
     enabled: true
-    storageClass: "nfs-client"
-    accessMode: ReadWriteOnce
-    size: 2Gi
+    secretName: nextcloud-valkey-users
+    passwordKey: default
 
 service:
   type: ClusterIP
