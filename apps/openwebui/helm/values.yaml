@@ -48,7 +48,7 @@ startupProbe:
     path: /health
     port: http
   periodSeconds: 15
-  failureThreshold: 40
+  failureThreshold: 90
 livenessProbe:
   httpGet:
     path: /health
