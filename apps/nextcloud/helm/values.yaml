@@ -1,7 +1,7 @@
 image:
   repository: nextcloud
   flavor: apache
-  tag: 32.0.15
+  tag: 33.0.10
   pullPolicy: IfNotPresent
 
 replicaCount: 1
