@@ -46,25 +46,19 @@ mariadb:
   enabled: false
 
 postgresql:
+  enabled: false
+
+externalDatabase:
   enabled: true
-  image:
-    registry: docker.io
-    repository: bitnamilegacy/postgresql
-    tag: 16.6.0-debian-12-r2
-  auth:
-    database: nextcloud
-    existingSecret: "postgres-secret"
-        # Names of keys in existing secret to use for PostgreSQL credentials
-    secretKeys:
-      adminPasswordKey: "adminPasswordKey"
-      userPasswordKey: "userPasswordKey"
-      replicationPasswordKey: "replicationPasswordKey"
-  primary:
-    persistence:
-      enabled: true
-      storageClass: "local-path"
-      accessMode: ReadWriteOnce
-      size: 3Gi
+  type: postgresql
+  host: nextcloud-db-rw
+  user: nextcloud
+  database: nextcloud
+  existingSecret:
+    enabled: true
+    secretName: nextcloud-cnpg-secret
+    usernameKey: username
+    passwordKey: password
 
 redis:
   enabled: true
