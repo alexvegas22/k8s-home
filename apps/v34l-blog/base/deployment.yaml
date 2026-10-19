@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: v34l-blog
-          image: ghcr.io/alexvegas22/0xv34l:main
+          image: ghcr.io/alexvegas22/0xv34l@sha256:a97d6acce9e4f8e154d3a6d89f6bec0338d9358da82f8b596eedaa014eb0b39b
           imagePullPolicy: Always
           ports:
             - containerPort: 80

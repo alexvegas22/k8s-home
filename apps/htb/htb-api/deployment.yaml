@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: htb-api
-        image: ghcr.io/alexvegas22/htb-api:latest
+        image: ghcr.io/alexvegas22/htb-api@sha256:68751e54250c333b4b50938ad0ba8cbb88ced60687d6bb20ab3fb9bc898471e9
         imagePullPolicy: Always
         ports:
         - containerPort: 80

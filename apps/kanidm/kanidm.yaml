@@ -9,6 +9,7 @@ spec:
   tlsSecretName: kanidm-tls
   portName: https
   logLevel: info
+  image: kanidm/server:1.11.2
 
   replicaGroups:
     - name: default

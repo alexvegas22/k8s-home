@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: htb-frontend
-        image: ghcr.io/alexvegas22/htb:latest
+        image: ghcr.io/alexvegas22/htb@sha256:aceeeabdb33734a9c6e8b4290d5d4143b8c573bfed574de8b2124361c36af57f
         imagePullPolicy: Always
         ports:
         - containerPort: 80
