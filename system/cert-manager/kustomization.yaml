@@ -4,7 +4,7 @@ helmCharts:
   - name: cert-manager
     releaseName: cert-manager
     repo: https://charts.jetstack.io
-    version: v1.18.6
+    version: v1.19.6
     valuesFile: values.yaml
     namespace: cert-manager
     includeCRDs: true
