@@ -36,7 +36,6 @@ spec:
               npm run compile
               npm run copydata
               cp -R /src/. /work/
-              chown -R 1000:1000 /work
           env:
             - name: SGB_REF
               value: "521d1b5ee3f8a0a4438ef9ed0cb052b2e69a6037"
