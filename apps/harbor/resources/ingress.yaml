@@ -10,7 +10,7 @@ spec:
       sectionName: https
 
   hostnames:
-    - core.harbor.m15ty.com
+    - harbor.m15ty.com
 
   rules:
     - matches:
