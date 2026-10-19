@@ -206,9 +206,6 @@ containerSecurityContext:
       - ALL
 
 portal:
-  image:
-    repository: goharbor/harbor-portal
-    tag: v2.12.2
   # set the service account to be used, default if left empty
   serviceAccountName: ""
   # mount the service account token
@@ -246,9 +243,6 @@ portal:
   #   command: [ 'sh', '-c', "sleep 20" ]
 
 core:
-  image:
-    repository: goharbor/harbor-core
-    tag: v2.12.2
   # set the service account to be used, default if left empty
   serviceAccountName: ""
   # mount the service account token
@@ -285,9 +279,6 @@ core:
 
 
 jobservice:
-  image:
-    repository: goharbor/harbor-jobservice
-    tag: v2.12.2
   # set the service account to be used, default if left empty
   serviceAccountName: ""
   # mount the service account token
