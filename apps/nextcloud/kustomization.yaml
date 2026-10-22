@@ -18,12 +18,19 @@ patches:
       name: nextcloud-collabora
     patch: |-
       - op: replace
+        path: /spec/strategy
+        value:
+          type: Recreate
+      - op: replace
+        path: /spec/progressDeadlineSeconds
+        value: 1800
+      - op: replace
         path: /spec/template/spec/containers/0/startupProbe
         value:
           httpGet:
             path: /
             port: 9980
             scheme: HTTP
-          failureThreshold: 120
+          failureThreshold: 300
           periodSeconds: 5
           timeoutSeconds: 10
