@@ -20,7 +20,7 @@ spec:
   allowInsecureClientDisablePkce: true
 
   scopeMap:
-    - group: idm_all_persons
+    - group: cluster-admins
       scopes:
         - openid
         - profile

@@ -20,7 +20,7 @@ spec:
     clientSecret:
       - secret
   scopeMap:
-    - group: idm_all_persons
+    - group: forgejo-users
       scopes:
         - openid
         - profile

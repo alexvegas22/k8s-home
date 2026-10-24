@@ -4,6 +4,10 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - kanidm-oidc-client.yaml
+  - resources/configmap.yaml
+  - resources/serviceaccount.yaml
+  - resources/secretstore.yaml
+  - resources/externalsecret.yaml
   - resources/httproute.yaml
 helmCharts:
   - name: open-webui

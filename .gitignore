@@ -1,5 +1,6 @@
 keys
 *secret.yaml
+!externalsecret.yaml
 /system/ceph/ceph.org
 /apps/vault/ca.crt
 /system/secrets/

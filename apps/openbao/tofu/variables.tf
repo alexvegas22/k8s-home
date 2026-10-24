@@ -22,6 +22,18 @@ variable "oidc_client_secret" {
   sensitive   = true
 }
 
+variable "openwebui_openai_api_keys" {
+  description = "Semicolon-separated OpenCode API keys, one per openaiBaseApiUrls entry. Pass via TF_VAR_openwebui_openai_api_keys."
+  type        = string
+  sensitive   = true
+}
+
+variable "openwebui_webui_secret_key" {
+  description = "Open WebUI session secret. Pass via TF_VAR_openwebui_webui_secret_key."
+  type        = string
+  sensitive   = true
+}
+
 variable "ui_redirect_uris" {
   description = "Allowed redirect URIs for the UI and CLI login flows."
   type        = list(string)

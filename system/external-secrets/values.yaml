@@ -1,0 +1,14 @@
+installCRDs: true
+
+crds:
+  # The v1 API is used by this repo; don't additionally serve v1beta1.
+  unsafeServeV1Beta1: false
+
+replicaCount: 1
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 128Mi
+  limits:
+    memory: 256Mi

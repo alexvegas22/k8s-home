@@ -1,3 +1,7 @@
+image:
+  # Match the declarative config below; subagents require a recent image.
+  tag: "v0.12.3"
+
 ollama:
   enabled: true
   persistentVolume:
@@ -10,7 +14,13 @@ ollama:
       memory: 1Gi
 
 pipelines:
-  enabled: true
+  enabled: false
+
+# Declarative OpenAI-compatible connections. Indexes match
+# resources/configmap.yaml (openai-api-configs.json).
+openaiBaseApiUrls:
+  - https://opencode.ai/zen/go/v1
+  - https://opencode.ai/zen/go/v1
 
 tika:
   enabled: false
@@ -37,6 +47,60 @@ commonEnvVars:
     value: "false"
   - name: WEBUI_URL
     value: "https://chat.m15ty.com"
+
+# Configuration that otherwise lives in the Open WebUI admin UI.
+# ENABLE_PERSISTENT_CONFIG=false makes these env vars authoritative.
+extraEnvVars:
+  - name: OPENAI_API_CONFIGS
+    valueFrom:
+      configMapKeyRef:
+        name: openwebui-config
+        key: openai-api-configs.json
+  # Synced from OpenBao by External Secrets Operator.
+  # OPENAI_API_KEYS is semicolon-separated, one key per entry in
+  # openaiBaseApiUrls.
+  - name: OPENAI_API_KEYS
+    valueFrom:
+      secretKeyRef:
+        name: credentials
+        key: OPENAI_API_KEYS
+  - name: WEBUI_SECRET_KEY
+    valueFrom:
+      secretKeyRef:
+        name: credentials
+        key: WEBUI_SECRET_KEY
+  - name: ENABLE_PERSISTENT_CONFIG
+    value: "false"
+  - name: DEFAULT_MODELS
+    value: "deepseek-v4.1-flash"
+  - name: DEFAULT_MODEL_METADATA
+    value: '{"capabilities":{"web_search":true},"defaultFeatureIds":["web_search"]}'
+  - name: ENABLE_WEB_SEARCH
+    value: "true"
+  - name: WEB_SEARCH_ENGINE
+    value: "duckduckgo"
+  - name: WEB_SEARCH_RESULT_COUNT
+    value: "5"
+  - name: WEB_SEARCH_CONCURRENT_REQUESTS
+    value: "0"
+  - name: ENABLE_SUBAGENTS
+    value: "true"
+  - name: SUBAGENTS_BACKGROUND_ENABLED
+    value: "true"
+  - name: SUBAGENTS_MAX_CONCURRENT
+    value: "20"
+  - name: SUBAGENTS_MAX_ASYNC
+    value: "20"
+  - name: SUBAGENTS_MAX_ITERATIONS
+    value: "30"
+  - name: ENABLE_LOGIN_FORM
+    value: "false"
+  - name: OAUTH_AUTO_REDIRECT
+    value: "true"
+  - name: OAUTH_MERGE_ACCOUNTS_BY_EMAIL
+    value: "true"
+  - name: ENABLE_LOCAL_WEB_FETCH
+    value: "true"
 
 persistence:
   enabled: true

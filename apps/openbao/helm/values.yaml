@@ -18,6 +18,10 @@ server:
   standalone:
     enabled: true
 
+  # Required for the Kubernetes auth method used by External Secrets Operator.
+  authDelegator:
+    enabled: true
+
 ui:
   enabled: true
   serviceType: "ClusterIP"
