@@ -3,15 +3,9 @@ image:
   tag: "v0.12.3"
 
 ollama:
-  enabled: true
-  persistentVolume:
-    enabled: true
-    size: 20Gi
-    storageClass: local-path
-  resources:
-    requests:
-      cpu: 250m
-      memory: 1Gi
+  # This cluster can't run local models; use the external OpenAI-compatible
+  # endpoints configured below instead.
+  enabled: false
 
 pipelines:
   enabled: false
