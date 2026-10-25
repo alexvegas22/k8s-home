@@ -111,3 +111,52 @@ resource "vault_kubernetes_auth_backend_role" "openwebui" {
   token_policies                   = [vault_policy.openwebui.name]
   token_ttl                        = 3600
 }
+
+# LiteLLM application secrets.
+resource "vault_mount" "litellm" {
+  path        = "litellm"
+  type        = "kv"
+  description = "LiteLLM application secrets"
+  options     = { version = "2" }
+}
+
+resource "vault_kv_secret_v2" "litellm" {
+  mount = vault_mount.litellm.path
+  name  = "config"
+
+  data_json = jsonencode({
+    LITELLM_MASTER_KEY = var.litellm_master_key
+    LITELLM_SALT_KEY   = var.litellm_salt_key
+    OPENCODE_API_KEY   = var.litellm_opencode_api_key
+    OPENAI_API_KEY     = var.litellm_openai_api_key
+    UI_USERNAME        = var.litellm_ui_username
+    UI_PASSWORD        = var.litellm_ui_password
+  })
+}
+
+resource "vault_policy" "litellm" {
+  name = "litellm-read"
+
+  policy = <<-POL
+    path "litellm/data/config" {
+      capabilities = ["read"]
+    }
+
+    path "litellm/metadata/config" {
+      capabilities = ["read"]
+    }
+
+    path "sys/internal/ui/mounts/litellm" {
+      capabilities = ["read"]
+    }
+  POL
+}
+
+resource "vault_kubernetes_auth_backend_role" "litellm" {
+  backend                          = vault_auth_backend.kubernetes.path
+  role_name                        = "litellm"
+  bound_service_account_names      = ["litellm-secrets"]
+  bound_service_account_namespaces = ["litellm"]
+  token_policies                   = [vault_policy.litellm.name]
+  token_ttl                        = 3600
+}

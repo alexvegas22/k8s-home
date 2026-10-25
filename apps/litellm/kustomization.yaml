@@ -1,0 +1,43 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: litellm
+
+resources:
+  - namespace.yaml
+  - cnpg.cluster.yaml
+  - resources/serviceaccount.yaml
+  - resources/secretstore.yaml
+  - resources/externalsecret.yaml
+  - resources/httproute.yaml
+
+helmCharts:
+  - name: litellm-helm
+    releaseName: litellm
+    # Kustomize appends the chart name; this resolves to
+    # oci://ghcr.io/berriai/litellm-helm.
+    repo: oci://ghcr.io/berriai
+    version: 1.106.4
+    valuesFile: helm/values.yaml
+    namespace: litellm
+
+# Helm test hooks are rendered as regular Pods by kustomize. Delete them so
+# ArgoCD doesn't apply them during normal syncs.
+patches:
+  - target:
+      kind: Pod
+      name: litellm-test-connection
+    patch: |-
+      $patch: delete
+      apiVersion: v1
+      kind: Pod
+      metadata:
+        name: litellm-test-connection
+  - target:
+      kind: Pod
+      name: litellm-env-test
+    patch: |-
+      $patch: delete
+      apiVersion: v1
+      kind: Pod
+      metadata:
+        name: litellm-env-test

@@ -16,6 +16,14 @@ export TF_VAR_oidc_client_secret="$(kubectl get secret -n openbao openbao-kanidm
 export TF_VAR_openwebui_openai_api_keys="$(kubectl -n openwebui get secret credentials -o jsonpath='{.data.OPENAI_API_KEYS}' | base64 -d)"
 export TF_VAR_openwebui_webui_secret_key="$(kubectl -n openwebui get secret credentials -o jsonpath='{.data.WEBUI_SECRET_KEY}' | base64 -d)"
 
+# LiteLLM secrets. Use a real OpenAI key for TF_VAR_litellm_openai_api_key.
+# The OpenCode key is the first entry from the Open WebUI key list.
+export TF_VAR_litellm_master_key="sk-$(openssl rand -hex 24)"
+export TF_VAR_litellm_salt_key="$(openssl rand -hex 32)"
+export TF_VAR_litellm_opencode_api_key="$(kubectl -n openwebui get secret credentials -o jsonpath='{.data.OPENAI_API_KEYS}' | base64 -d | cut -d';' -f1)"
+export TF_VAR_litellm_openai_api_key='<openai-api-key>'
+export TF_VAR_litellm_ui_password="$(openssl rand -hex 16)"
+
 tofu init
 tofu plan
 tofu apply
@@ -42,6 +50,18 @@ tofu import vault_jwt_auth_backend_role.admin auth/oidc/role/admin
 If a role does not exist yet, skip its import; `tofu apply` will create it.
 After importing, `tofu plan` should show only the intended changes (for
 example, `default_role` moving from `user` to `admin`).
+
+## LiteLLM
+
+This config also creates:
+
+- KV v2 mount `litellm`, secret `config`
+- policy `litellm-read`
+- Kubernetes auth role `litellm`, bound to service account
+  `litellm/litellm-secrets`
+
+External Secrets Operator syncs `litellm/config` into the
+`litellm/litellm-credentials` Kubernetes Secret for the LiteLLM proxy.
 
 ## Admin access
 

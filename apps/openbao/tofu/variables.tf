@@ -34,6 +34,42 @@ variable "openwebui_webui_secret_key" {
   sensitive   = true
 }
 
+variable "litellm_master_key" {
+  description = "LiteLLM proxy master key. Pass via TF_VAR_litellm_master_key."
+  type        = string
+  sensitive   = true
+}
+
+variable "litellm_salt_key" {
+  description = "LiteLLM key-encryption salt. Keep stable. Pass via TF_VAR_litellm_salt_key."
+  type        = string
+  sensitive   = true
+}
+
+variable "litellm_opencode_api_key" {
+  description = "OpenCode Zen API key for LiteLLM. Pass via TF_VAR_litellm_opencode_api_key."
+  type        = string
+  sensitive   = true
+}
+
+variable "litellm_openai_api_key" {
+  description = "OpenAI API key for LiteLLM. Pass via TF_VAR_litellm_openai_api_key."
+  type        = string
+  sensitive   = true
+}
+
+variable "litellm_ui_username" {
+  description = "LiteLLM UI username."
+  type        = string
+  default     = "admin"
+}
+
+variable "litellm_ui_password" {
+  description = "LiteLLM UI password. Pass via TF_VAR_litellm_ui_password."
+  type        = string
+  sensitive   = true
+}
+
 variable "ui_redirect_uris" {
   description = "Allowed redirect URIs for the UI and CLI login flows."
   type        = list(string)
