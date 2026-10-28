@@ -101,3 +101,20 @@
     ],
   },
 }
+---
+{
+  apiVersion: "kaniop.rs/v1beta1",
+  kind: "KanidmGroup",
+  metadata: {
+    name: "music-users",
+  },
+  spec: {
+    kanidmRef: {
+      name: "kanidm",
+    },
+    members: [
+      "v34l",
+      "peelz",
+    ],
+  },
+}

@@ -1,0 +1,57 @@
+apiVersion: kaniop.rs/v1beta1
+kind: KanidmOAuth2Client
+metadata:
+  name: navidrome
+  namespace: music
+spec:
+  kanidmRef:
+    name: kanidm
+    namespace: kanidm
+
+  displayname: Navidrome
+  origin: https://music.m15ty.com
+  redirectUrl:
+    - https://music.m15ty.com/oauth2/callback
+
+  disableConsentPrompt: true
+
+  scopeMap:
+    - group: music-users
+      scopes:
+        - openid
+        - profile
+        - email
+        - groups_name
+
+  secretTemplate:
+    labels:
+      app.kubernetes.io/part-of: music
+---
+apiVersion: kaniop.rs/v1beta1
+kind: KanidmOAuth2Client
+metadata:
+  name: lidarr
+  namespace: music
+spec:
+  kanidmRef:
+    name: kanidm
+    namespace: kanidm
+
+  displayname: Lidarr
+  origin: https://lidarr.m15ty.com
+  redirectUrl:
+    - https://lidarr.m15ty.com/oauth2/callback
+
+  disableConsentPrompt: true
+
+  scopeMap:
+    - group: music-users
+      scopes:
+        - openid
+        - profile
+        - email
+        - groups_name
+
+  secretTemplate:
+    labels:
+      app.kubernetes.io/part-of: music

@@ -1,0 +1,214 @@
+# oauth2-proxy terminates SSO for the music apps. Each app gets its own
+# instance because a single instance can only proxy to one upstream
+# (`--upstream`). Kanidm credentials come from the kaniop-generated Secrets
+# (<client>-kanidm-oauth2-credentials) declared in ../kanidm-oidc-clients.yaml.
+#
+# Navidrome: /rest/ (Subsonic clients) and /share/ (public links) bypass SSO;
+# those requests fall back to Navidrome's own auth, as documented upstream.
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: navidrome-sso
+  namespace: music
+  labels:
+    app: navidrome-sso
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: navidrome-sso
+  template:
+    metadata:
+      labels:
+        app: navidrome-sso
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: oauth2-proxy
+          image: quay.io/oauth2-proxy/oauth2-proxy:v7.15.5
+          imagePullPolicy: IfNotPresent
+          args:
+            - --provider=oidc
+            - --oidc-issuer-url=https://auth.m15ty.com/oauth2/openid/navidrome
+            - --redirect-url=https://music.m15ty.com/oauth2/callback
+            - --upstream=http://navidrome.music.svc.cluster.local:4533/
+            - --http-address=0.0.0.0:4180
+            - --email-domain=*
+            - --reverse-proxy=true
+            - --skip-provider-button=true
+            - --code-challenge-method=S256
+            - --cookie-name=_music_navidrome
+            - --cookie-secure=true
+            - --cookie-samesite=lax
+            - --cookie-expire=168h
+            - --pass-user-headers=true
+            - --skip-auth-route=^/rest/.*
+            - --skip-auth-route=^/share/.*
+          env:
+            - name: OAUTH2_PROXY_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: navidrome-kanidm-oauth2-credentials
+                  key: CLIENT_ID
+            - name: OAUTH2_PROXY_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: navidrome-kanidm-oauth2-credentials
+                  key: CLIENT_SECRET
+            - name: OAUTH2_PROXY_COOKIE_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: music-oauth2-proxy
+                  key: cookie-secret
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+          ports:
+            - name: http
+              containerPort: 4180
+          readinessProbe:
+            httpGet:
+              path: /ping
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /ping
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 30
+          resources:
+            requests:
+              cpu: 10m
+              memory: 32Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: navidrome-sso
+  namespace: music
+  labels:
+    app: navidrome-sso
+spec:
+  type: ClusterIP
+  selector:
+    app: navidrome-sso
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lidarr-sso
+  namespace: music
+  labels:
+    app: lidarr-sso
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lidarr-sso
+  template:
+    metadata:
+      labels:
+        app: lidarr-sso
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: oauth2-proxy
+          image: quay.io/oauth2-proxy/oauth2-proxy:v7.15.5
+          imagePullPolicy: IfNotPresent
+          args:
+            - --provider=oidc
+            - --oidc-issuer-url=https://auth.m15ty.com/oauth2/openid/lidarr
+            - --redirect-url=https://lidarr.m15ty.com/oauth2/callback
+            - --upstream=http://lidarr.music.svc.cluster.local:8686/
+            - --http-address=0.0.0.0:4180
+            - --email-domain=*
+            - --reverse-proxy=true
+            - --skip-provider-button=true
+            - --code-challenge-method=S256
+            - --cookie-name=_music_lidarr
+            - --cookie-secure=true
+            - --cookie-samesite=lax
+            - --cookie-expire=168h
+            - --pass-user-headers=true
+            # Lidarr's API is protected by its own API key, so let
+            # Prowlarr/Sonarr/scripts talk to it without a browser session.
+            - --skip-auth-route=^/api/.*
+          env:
+            - name: OAUTH2_PROXY_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: lidarr-kanidm-oauth2-credentials
+                  key: CLIENT_ID
+            - name: OAUTH2_PROXY_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: lidarr-kanidm-oauth2-credentials
+                  key: CLIENT_SECRET
+            - name: OAUTH2_PROXY_COOKIE_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: music-oauth2-proxy
+                  key: cookie-secret
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+          ports:
+            - name: http
+              containerPort: 4180
+          readinessProbe:
+            httpGet:
+              path: /ping
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /ping
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 30
+          resources:
+            requests:
+              cpu: 10m
+              memory: 32Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lidarr-sso
+  namespace: music
+  labels:
+    app: lidarr-sso
+spec:
+  type: ClusterIP
+  selector:
+    app: lidarr-sso
+  ports:
+    - name: http
+      port: 80
+      targetPort: http

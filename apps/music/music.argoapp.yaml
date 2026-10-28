@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: music
+  namespace: argocd
+spec:
+  project: k8s-home
+
+  destination:
+    namespace: music
+    server: https://kubernetes.default.svc
+
+  source:
+    path: apps/music
+    repoURL: https://github.com/alexvegas22/k8s-home.git
+    targetRevision: talos
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

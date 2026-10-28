@@ -1,0 +1,106 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: navidrome
+  namespace: music
+  labels:
+    app: navidrome
+spec:
+  replicas: 1
+  # RWO config volume + single writer DB.
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: navidrome
+  template:
+    metadata:
+      labels:
+        app: navidrome
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: navidrome
+          image: navidrome/navidrome:0.64.2
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 4533
+          env:
+            - name: ND_MUSICFOLDER
+              value: /music
+            - name: ND_DATAFOLDER
+              value: /data
+            - name: ND_CACHEFOLDER
+              value: /data/cache
+            - name: ND_PORT
+              value: "4533"
+            - name: ND_LOGLEVEL
+              value: info
+            - name: ND_SCANNER_SCHEDULE
+              value: "@every 1h"
+            - name: ND_TRANSCODINGCACHESIZE
+              value: 2GiB
+            - name: ND_ENABLEINSIGHTSCOLLECTOR
+              value: "false"
+            # SSO: oauth2-proxy (see sso/oauth2-proxy.yaml) authenticates the
+            # web UI and forwards the Kanidm username. Requests without the
+            # header fall back to Navidrome's own auth, which is what the
+            # Subsonic clients and /share/ links use.
+            - name: ND_EXTAUTH_USERHEADER
+              value: X-Forwarded-User
+            # Everything in the cluster's pod CIDR is trusted. Traffic reaches
+            # Navidrome through oauth2-proxy only; narrow this if you ever add
+            # a second ingress path. See README.org.
+            - name: ND_EXTAUTH_TRUSTEDSOURCES
+              value: 10.244.0.0/16
+            - name: ND_EXTAUTH_LOGOUTURL
+              value: https://music.m15ty.com/oauth2/sign_out
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+          volumeMounts:
+            - name: music
+              mountPath: /music
+              readOnly: true
+            - name: data
+              mountPath: /data
+            - name: tmp
+              mountPath: /tmp
+          readinessProbe:
+            httpGet:
+              path: /ping
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /ping
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 30
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: "1"
+              memory: 1Gi
+      volumes:
+        - name: music
+          persistentVolumeClaim:
+            claimName: music-library
+        - name: data
+          persistentVolumeClaim:
+            claimName: navidrome-data
+        - name: tmp
+          emptyDir: {}

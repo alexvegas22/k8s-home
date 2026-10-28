@@ -1,0 +1,103 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lidarr
+  namespace: music
+  labels:
+    app: lidarr
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: lidarr
+  template:
+    metadata:
+      labels:
+        app: lidarr
+    spec:
+      securityContext:
+        # LinuxServer images start as root to chown /config and then drop to
+        # PUID/PGID, so rootless pod-level settings are not an option here.
+        seccompProfile:
+          type: RuntimeDefault
+      initContainers:
+        # Lidarr has no env var for its auth mode. Force "External" (trust the
+        # authenticating proxy) on every start so the setting cannot drift.
+        # On a brand new /config this is a no-op (config.xml does not exist
+        # yet); restart once after the first boot to apply it, or set it by
+        # hand in Settings -> General -> Security. See README.org.
+        - name: configure-auth
+          image: busybox:1.37
+          command:
+            - sh
+            - -c
+            - |
+              set -eu
+              if [ -f /config/config.xml ]; then
+                sed -i \
+                  -e 's|<AuthenticationMethod>.*</AuthenticationMethod>|<AuthenticationMethod>External</AuthenticationMethod>|' \
+                  -e 's|<AuthenticationRequired>.*</AuthenticationRequired>|<AuthenticationRequired>Enabled</AuthenticationRequired>|' \
+                  /config/config.xml
+              fi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+          volumeMounts:
+            - name: config
+              mountPath: /config
+      containers:
+        - name: lidarr
+          image: lscr.io/linuxserver/lidarr:3.1.6.5079-ls46
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8686
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: UMASK
+              value: "022"
+            - name: TZ
+              value: America/Toronto
+          volumeMounts:
+            - name: config
+              mountPath: /config
+            - name: music
+              mountPath: /music
+            - name: downloads
+              mountPath: /downloads
+          readinessProbe:
+            httpGet:
+              path: /ping
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 15
+          livenessProbe:
+            httpGet:
+              path: /ping
+              port: http
+            initialDelaySeconds: 60
+            periodSeconds: 30
+          resources:
+            requests:
+              cpu: 200m
+              memory: 512Mi
+            limits:
+              cpu: "2"
+              memory: 2Gi
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: lidarr-config
+        - name: music
+          persistentVolumeClaim:
+            claimName: music-library
+        - name: downloads
+          persistentVolumeClaim:
+            claimName: music-downloads

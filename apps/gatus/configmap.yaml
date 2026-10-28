@@ -40,3 +40,13 @@ data:
         interval: 30s
         conditions:
           - "[STATUS] == 200"
+      - name: navidrome
+        url: http://navidrome.music.svc.cluster.local:4533/ping
+        interval: 30s
+        conditions:
+          - "[STATUS] == 200"
+      - name: lidarr
+        url: http://lidarr.music.svc.cluster.local:8686/ping
+        interval: 30s
+        conditions:
+          - "[STATUS] == 200"

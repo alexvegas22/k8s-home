@@ -11,3 +11,5 @@ Here's a list of services I'm currently hosting :
  - Immich
  - Vaultwarden
  - Open WebUI (chat.m15ty.com)
+ - Navidrome (music.m15ty.com)
+ - Lidarr (lidarr.m15ty.com)

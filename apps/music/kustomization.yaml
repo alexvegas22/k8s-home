@@ -1,0 +1,17 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# Namespaces are set explicitly on each resource: the PVs in storage.yaml are
+# cluster-scoped and should not be rewritten by a namespace transformer.
+resources:
+  - namespace.yaml
+  - storage.yaml
+  - secret.yaml
+  - kanidm-oidc-clients.yaml
+  - navidrome/deployment.yaml
+  - navidrome/service.yaml
+  - lidarr/deployment.yaml
+  - lidarr/service.yaml
+  - sso/oauth2-proxy.yaml
+  - resources/navidrome.httproute.yaml
+  - resources/lidarr.httproute.yaml

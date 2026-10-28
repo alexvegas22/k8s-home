@@ -1,0 +1,79 @@
+#+TITLE: Music stack (Navidrome + Lidarr + Kanidm SSO)
+#+SUBTITLE: Subsonic library server and acquisition, gated behind Kanidm
+
+* Layout
+
+| File                         | Purpose                                              |
+|------------------------------+------------------------------------------------------|
+| =storage.yaml=               | NFS PV/PVCs for library + downloads, local-path config |
+| =kanidm-oidc-clients.yaml=   | =KanidmOAuth2Client= for Navidrome and Lidarr        |
+| =secret.yaml=                | oauth2-proxy cookie signing secret                   |
+| =navidrome/=                 | Navidrome Deployment/Service                         |
+| =lidarr/=                    | Lidarr Deployment/Service                            |
+| =sso/oauth2-proxy.yaml=      | One oauth2-proxy per app (Kanidm OIDC front door)    |
+| =resources/*.httproute.yaml= | =music.m15ty.com= and =lidarr.m15ty.com=            |
+
+* Prerequisites
+
+1. NFS exports on =192.168.1.3= (same server the =nfs-client= provisioner
+   uses):
+   #+begin_src sh
+   mkdir -p /mnt/nfs/music /mnt/nfs/downloads
+   # the user owning the files must be readable by uid/gid 1000 in-cluster
+   #+end_src
+2. DNS: =music.m15ty.com= and =lidarr.m15ty.com= resolve to the Cilium
+   gateway (wildcard =*.m15ty.com= already covers them).
+3. Kanidm group =music-users= exists (declared in =apps/kanidm/person.yaml=).
+   Only members of that group can complete the OIDC flow, because the
+   =scopeMap= is restricted to it.
+
+* How auth works
+
+  Client -> Cilium Gateway -> oauth2-proxy -> app
+
+* Navidrome web UI: oauth2-proxy authenticates against Kanidm and forwards
+  =X-Forwarded-User=. Navidrome trusts the pod CIDR
+  (=ND_EXTAUTH_TRUSTEDSOURCES=) and auto-creates the account on first login.
+* Navidrome =/rest/= (Subsonic API) and =/share/= (public links) bypass
+  oauth2-proxy; those requests fall back to Navidrome's own credentials.
+  Mobile clients therefore keep working with a normal Navidrome login.
+* Lidarr runs with =AuthenticationMethod=External= (enforced by an
+  initContainer) so it trusts the proxy and never shows a local login.
+  Lidarr's =/api/= bypasses SSO because it is already protected by its own
+  API key.
+
+* First boot / one-time steps
+
+1. *Lidarr auth mode.* The initContainer can only patch =config.xml= once it
+   exists. On a brand new =/config= the first start writes its default
+   (=Forms=), so do either of:
+   - restart the pod once (=kubectl -n music rollout restart deploy/lidarr=), or
+   - open Settings -> General -> Security and set Authentication to
+     =External=, Required = Enabled.
+2. *Navidrome admin.* The first user that authenticates through the proxy
+   (i.e. the first =music-users= member to open the UI) is granted admin,
+   exactly like the first user of a fresh install. Subsequent SSO users are
+   created automatically with random passwords. Those random passwords are
+   useless to Subsonic clients, so either:
+   - log in as the admin and set a password for the account the Pi uses
+     (Settings -> Users), or
+   - create a dedicated non-admin user with a known password for the Pi.
+   =ND_ENABLEUSEREDITING= is deliberately left enabled so those passwords can
+   be set; disable it only if all Subsonic clients use generated tokens.
+3. *Lidarr download client.* Point Lidarr at qBittorrent/SABnzbd with
+   =/downloads= as the completed path (mounted at the same path in both
+   containers) and =/music= as the library root.
+
+* Cautions
+
+* =ND_EXTAUTH_TRUSTEDSOURCES= trusts =10.244.0.0/16=, i.e. any pod in the
+  cluster can impersonate a user by sending =X-Forwarded-User=. Traffic from
+  outside the cluster always goes through oauth2-proxy, which overwrites the
+  header. If you want defence in depth, add a NetworkPolicy allowing ingress
+  to =navidrome:4533= and =lidarr:8686= only from the =*-sso= pods.
+* oauth2-proxy adds ~10 ms and a redirect per unauthenticated request; it is
+  not in the audio path (streams are served by Navidrome after auth).
+* The cookie secret in =secret.yaml= is committed to this repo. Rotate it
+  with =openssl rand -base64 32= and expect all sessions to be logged out.
+* Navidrome transcoding is CPU bound. On the current nodes it is fine for a
+  couple of remote streams; disable it for LAN clients (=raw=).
