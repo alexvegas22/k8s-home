@@ -64,8 +64,12 @@ persistence:
       rootdirectory: /storage
       #maxthreads: 100
 
+# Initial admin password comes from OpenBao (kubernetes/apps/harbor/admin)
+# through the harbor-admin ExternalSecret. Harbor only uses it on a fresh
+# database; afterwards the password lives in Harbor's DB.
+existingSecretAdminPassword: harbor-admin
 existingSecretAdminPasswordKey: HARBOR_ADMIN_PASSWORD
-harborAdminPassword: "Harbor12345"
+harborAdminPassword: ""
 
 internalTLS:
   # If internal TLS enabled
