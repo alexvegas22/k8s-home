@@ -3,6 +3,7 @@ kind: Kustomization
 
 resources:
   - resources/ingress.yaml
+  - kanidm-oidc-client.yaml
 helmCharts:
   - name: harbor
     version: "1.19.4"
