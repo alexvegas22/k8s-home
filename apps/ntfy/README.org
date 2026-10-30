@@ -1,0 +1,87 @@
+#+TITLE: ntfy
+#+SUBTITLE: Self-hosted push notification server
+
+* Layout
+
+| File                | Purpose                                              |
+|---------------------+------------------------------------------------------|
+| =configmap.yaml=    | =server.yml= (non-secret ntfy configuration)         |
+| =pvc.yaml=          | SQLite cache and user database on =local-path=       |
+| =serviceaccount.yaml= | Identity used by External Secrets to read OpenBao  |
+| =secretstore.yaml=  | External Secrets connection to OpenBao                |
+| =externalsecret.yaml= | Syncs =ntfy/config= into the =ntfy-credentials= Secret |
+| =deployment.yaml=   | ntfy server                                          |
+| =service.yaml=      | ClusterIP service                                    |
+| =httproute.yaml=    | =ntfy.m15ty.com= through the Cilium gateway          |
+
+* OpenBao setup
+
+Credentials are *not* stored in this repository. Provision the KV mount,
+policy, Kubernetes auth role, and secret once:
+
+#+begin_src sh
+ROOT_TOKEN="$(kubectl -n openbao get secret openbao-init-keys \
+  -o jsonpath='{.data.init\.json}' | base64 -d |
+  python3 -c 'import json,sys;print(json.load(sys.stdin)["root_token"])')"
+
+BAO=(kubectl -n openbao exec -i openbao-0 -- env
+     VAULT_ADDR=http://127.0.0.1:8200 VAULT_TOKEN="$ROOT_TOKEN" bao)
+
+"${BAO[@]}" secrets enable -path=ntfy kv-v2
+"${BAO[@]}" policy write ntfy-read - <<'POL'
+path "ntfy/data/config" {
+  capabilities = ["read"]
+}
+
+path "ntfy/metadata/config" {
+  capabilities = ["read"]
+}
+
+path "sys/internal/ui/mounts/ntfy" {
+  capabilities = ["read"]
+}
+POL
+
+"${BAO[@]}" write auth/kubernetes/role/ntfy \
+  bound_service_account_names=ntfy-secrets \
+  bound_service_account_namespaces=ntfy \
+  token_policies=ntfy-read \
+  token_ttl=1h
+#+end_src
+
+Seed =ntfy/config= with two keys:
+
+- =NTFY_AUTH_USERS= — =username:<bcrypt-hash>:admin= (the hash can be made
+  with =mkpasswd -m bcrypt -R 10 <password>=)
+- =NTFY_AUTH_TOKENS= — =username:tk_<29 characters>:<label>=
+
+#+begin_src sh
+"${BAO[@]}" kv put ntfy/config \
+  NTFY_AUTH_USERS='v34l:$2a$10$...:admin' \
+  NTFY_AUTH_TOKENS='v34l:tk_...:default'
+#+end_src
+
+External Secrets then creates =ntfy/ntfy-credentials=, and the Deployment
+consumes it with =envFrom=.
+
+* Auth model
+
+ntfy has no native OIDC support. It uses its own users and access tokens, so
+the mobile apps and CLI keep working. The instance is private
+(=auth-default-access: deny-all=): publish and subscribe both require the
+generated token or the web login.
+
+Use the token as a Bearer token or as the password in HTTP Basic auth:
+
+#+begin_src sh
+curl -H "Authorization: Bearer tk_..." https://ntfy.m15ty.com/v1/health
+curl -u v34l:tk_... -d "hello" https://ntfy.m15ty.com/test
+#+end_src
+
+* Notes
+
+- The app listens on =:8080= inside the pod so it can run as uid 1000.
+- The SQLite files are on =local-path=, so the pod is pinned to one node's
+  local volume. A reschedule to another node loses the cache and auth database;
+  use =nfs-client= instead if that trade-off is not acceptable.
+- Attachments are disabled because no =attachment-cache-dir= is configured.

@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ntfy-config
+data:
+  server.yml: |
+    # Public URL used for attachment links and the web app.
+    base-url: "https://ntfy.m15ty.com"
+
+    # The Cilium gateway terminates TLS and forwards plain HTTP. Use an
+    # unprivileged port because the container runs as uid 1000.
+    listen-http: ":8080"
+    behind-proxy: true
+
+    # SQLite files live on the ntfy-data PVC so the cache and user database
+    # survive pod restarts.
+    cache-file: "/var/lib/ntfy/cache.db"
+    cache-duration: "24h"
+    auth-file: "/var/lib/ntfy/user.db"
+
+    # Private instance: an account or access token is required for every
+    # request. Credentials are synced from OpenBao by External Secrets.
+    auth-default-access: "deny-all"
+    enable-login: true
