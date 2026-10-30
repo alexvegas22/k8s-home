@@ -81,7 +81,7 @@ curl -u v34l:tk_... -d "hello" https://ntfy.m15ty.com/test
 * Notes
 
 - The app listens on =:8080= inside the pod so it can run as uid 1000.
-- The SQLite files are on =local-path=, so the pod is pinned to one node's
-  local volume. A reschedule to another node loses the cache and auth database;
-  use =nfs-client= instead if that trade-off is not acceptable.
+- The SQLite files are on =nfs-client= so the pod can be scheduled on any
+  node. ntfy is low-traffic, so SQLite over NFS is acceptable here; keep the
+  deployment at one replica because SQLite is single-writer regardless.
 - Attachments are disabled because no =attachment-cache-dir= is configured.
