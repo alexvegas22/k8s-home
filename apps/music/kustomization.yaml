@@ -6,7 +6,6 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - storage.yaml
-  - secret.yaml
   - kanidm-oidc-clients.yaml
   - navidrome/deployment.yaml
   - navidrome/service.yaml
