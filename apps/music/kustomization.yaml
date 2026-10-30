@@ -12,5 +12,8 @@ resources:
   - lidarr/deployment.yaml
   - lidarr/service.yaml
   - sso/oauth2-proxy.yaml
+  - resources/serviceaccount.yaml
+  - resources/secretstore.yaml
+  - resources/externalsecret.yaml
   - resources/navidrome.httproute.yaml
   - resources/lidarr.httproute.yaml

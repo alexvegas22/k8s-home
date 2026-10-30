@@ -7,7 +7,9 @@
 |------------------------------+------------------------------------------------------|
 | =storage.yaml=               | NFS PV/PVCs for library + downloads, local-path config |
 | =kanidm-oidc-clients.yaml=   | =KanidmOAuth2Client= for Navidrome and Lidarr        |
-| =secret.yaml=                | oauth2-proxy cookie signing secret                   |
+| =resources/serviceaccount.yaml= | Identity used by External Secrets to read OpenBao   |
+| =resources/secretstore.yaml= | External Secrets connection to OpenBao               |
+| =resources/externalsecret.yaml= | Syncs the oauth2-proxy cookie signing secret      |
 | =navidrome/=                 | Navidrome Deployment/Service                         |
 | =lidarr/=                    | Lidarr Deployment/Service                            |
 | =sso/oauth2-proxy.yaml=      | One oauth2-proxy per app (Kanidm OIDC front door)    |
@@ -73,7 +75,8 @@
   to =navidrome:4533= and =lidarr:8686= only from the =*-sso= pods.
 * oauth2-proxy adds ~10 ms and a redirect per unauthenticated request; it is
   not in the audio path (streams are served by Navidrome after auth).
-* The cookie secret in =secret.yaml= is committed to this repo. Rotate it
-  with =openssl rand -base64 32= and expect all sessions to be logged out.
+* The oauth2-proxy cookie secret is stored in OpenBao at =music/config=
+  (=cookie-secret=), not in Git. It must be exactly 32 bytes; rotate it with
+  =openssl rand -hex 16= and expect all sessions to be logged out.
 * Navidrome transcoding is CPU bound. On the current nodes it is fine for a
   couple of remote streams; disable it for LAN clients (=raw=).
