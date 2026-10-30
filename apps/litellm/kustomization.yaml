@@ -8,6 +8,7 @@ resources:
   - resources/serviceaccount.yaml
   - resources/secretstore.yaml
   - resources/externalsecret.yaml
+  - resources/db-secret.yaml
   - resources/httproute.yaml
 
 helmCharts:
