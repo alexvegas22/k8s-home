@@ -64,6 +64,15 @@ Seed =ntfy/config= with two keys:
 External Secrets then creates =ntfy/ntfy-credentials=, and the Deployment
 consumes it with =envFrom=.
 
+The human-readable login details are kept separately in =ntfy/credentials=
+(keys =username=, =password=, =token=). That path is *not* granted to the
+External Secrets role, so the application never receives the plaintext
+password. Retrieve it with an admin OpenBao token:
+
+#+begin_src sh
+"${BAO[@]}" kv get ntfy/credentials
+#+end_src
+
 * Auth model
 
 ntfy has no native OIDC support. It uses its own users and access tokens, so
