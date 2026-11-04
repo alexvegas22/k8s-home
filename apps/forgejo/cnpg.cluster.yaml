@@ -11,6 +11,11 @@ spec:
       owner: forgejo
       secret:
         name: postgresql-forgejo-app
+  postgresql:
+    parameters:
+      # Bound WAL retained for stale replication slots; without this a
+      # lagging replica can fill the 5Gi WAL volume and the node's disk.
+      max_slot_wal_keep_size: "2GB"
   storage:
     size: 5Gi
     storageClass: local-path
